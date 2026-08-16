@@ -222,6 +222,34 @@ function initPetals() {
 }
 
 /* ============================================================
+   CLICK-ANYWHERE HEART BURST
+   ============================================================ */
+function spawnClickHearts(x, y) {
+  const count = 6;
+  for (let i = 0; i < count; i++) {
+    const heart = document.createElement('span');
+    heart.className = 'heart-pop';
+    heart.textContent = '♥';
+    heart.style.left = x + 'px';
+    heart.style.top = y + 'px';
+    heart.style.color = i % 2 === 0 ? 'var(--gold)' : 'var(--blush)';
+    heart.style.fontSize = (10 + Math.random() * 12) + 'px';
+    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
+    const dist = 30 + Math.random() * 35;
+    heart.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+    heart.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 800);
+  }
+}
+
+function initClickHearts() {
+  document.addEventListener('click', (e) => {
+    spawnClickHearts(e.clientX, e.clientY);
+  });
+}
+
+/* ============================================================
    EASTER EGGS 🥚 — because two 90s kids deserve a website with secrets
    ============================================================ */
 
@@ -317,6 +345,7 @@ function initEasterEggs() {
 document.addEventListener('DOMContentLoaded', () => {
   render();
   initPetals();
+  initClickHearts();
   initRsvpForm();
   initEasterEggs();
   updateCountdown();
