@@ -206,14 +206,17 @@ function initRsvpForm() {
 function initPetals() {
   const container = document.querySelector('.petals');
   const count = 18;
+  const colors = ['var(--blush)', 'var(--gold)'];
   for (let i = 0; i < count; i++) {
-    const petal = document.createElement('div');
+    const petal = document.createElement('span');
     petal.className = 'petal';
+    petal.textContent = '♥';
     petal.style.left = Math.random() * 100 + 'vw';
     petal.style.animationDuration = (10 + Math.random() * 12) + 's';
     petal.style.animationDelay = (Math.random() * 15) + 's';
     petal.style.opacity = 0.3 + Math.random() * 0.4;
-    petal.style.transform = `scale(${0.6 + Math.random() * 0.8})`;
+    petal.style.fontSize = (10 + Math.random() * 16) + 'px';
+    petal.style.color = colors[i % colors.length];
     container.appendChild(petal);
   }
 }
