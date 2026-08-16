@@ -1,12 +1,12 @@
 :root {
-  --cream: #faf7f9;
-  --cream-alt: #eef3f8;
-  --ink: #33404f;
-  --ink-soft: #64748a;
-  --blush: #eda9c0;
-  --gold: #5b84ab;
-  --gold-soft: #cfe0ef;
-  --line: #dbe6f0;
+  --cream: #fdf7fa;
+  --cream-alt: #fbeaf1;
+  --ink: #3d2f3a;
+  --ink-soft: #7a6b76;
+  --blush: #7fa8c9;
+  --gold: #d9678f;
+  --gold-soft: #f6d3e2;
+  --line: #f0d6e2;
   --radius: 4px;
 }
 
