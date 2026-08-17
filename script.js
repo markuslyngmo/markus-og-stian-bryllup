@@ -253,6 +253,32 @@ function initGuestDetailFields() {
 /* ============================================================
    RSVP FORM (client-side demo — se README for backend-kobling)
    ============================================================ */
+function buildRsvpSummary(fd, guestsCount, attendingLabel) {
+  const lines = [];
+  lines.push(`Navn: ${fd.get('fullName') || ''}`);
+  lines.push(`E-post: ${fd.get('email') || ''}`);
+  lines.push(`Kommer: ${attendingLabel}`);
+  lines.push(`Antall gjester: ${guestsCount}`);
+  lines.push('');
+
+  for (let i = 1; i <= guestsCount; i++) {
+    const guestName = i === 1 ? fd.get('fullName') : fd.get(`guestName${i}`);
+    lines.push(`— Gjest ${i}: ${guestName || '(uten navn)'} —`);
+    lines.push(`  Sangønske: ${fd.get(`songWish${i}`) || '(ingen)'}`);
+    lines.push(`  Ønsker å holde tale: ${fd.get(`speechWish${i}`) === 'on' ? 'Ja' : 'Nei'}`);
+    lines.push(`  Matallergier: ${fd.get(`allergies${i}`) || '(ingen)'}`);
+    lines.push('');
+  }
+
+  const message = fd.get('message');
+  if (message) {
+    lines.push('Hilsen til brudeparet:');
+    lines.push(message);
+  }
+
+  return lines.join('\n');
+}
+
 function initRsvpForm() {
   const form = document.getElementById('rsvpForm');
   const note = document.getElementById('rsvpNote');
@@ -263,11 +289,21 @@ function initRsvpForm() {
       note.style.color = 'var(--gold)';
       return;
     }
-    const data = new FormData(form);
+
+    const fd = new FormData(form);
+    const guestsCount = Math.max(1, Math.min(10, parseInt(fd.get('guests'), 10) || 1));
+    const attendingLabel = fd.get('attending') === 'ja' ? 'Ja, kommer' : 'Kan dessverre ikke';
+
+    const payload = new FormData();
+    payload.append('name', fd.get('fullName') || '');
+    payload.append('email', fd.get('email') || '');
+    payload.append('_subject', `OSA fra ${fd.get('fullName') || '?'} — ${attendingLabel}, ${guestsCount} gjester`);
+    payload.append('Oppsummering', buildRsvpSummary(fd, guestsCount, attendingLabel));
+
     try {
       await fetch(WEDDING.rsvpFormEndpoint, {
         method: 'POST',
-        body: data,
+        body: payload,
         headers: { Accept: 'application/json' }
       });
       form.innerHTML = '<p style="text-align:center;">Takk for svaret ditt! 💛</p>';
