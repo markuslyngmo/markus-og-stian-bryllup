@@ -196,6 +196,13 @@ function renderGuestNameFields() {
       <input type="text" id="songWish${i + 1}" name="songWish${i + 1}" placeholder="Én sang du gjerne vil høre på dansegulvet">
     `;
     container.appendChild(songRow);
+
+    const speechRow = document.createElement('div');
+    speechRow.className = 'form-row';
+    speechRow.innerHTML = `
+      <label class="radio-opt"><input type="checkbox" id="speechWish${i + 1}" name="speechWish${i + 1}"> Gjest ${i + 1} ønsker å holde en tale</label>
+    `;
+    container.appendChild(speechRow);
   }
 }
 
