@@ -453,15 +453,15 @@ a { color: var(--gold); }
   position: fixed;
   bottom: 1rem;
   left: 1rem;
-  width: 44px;
-  height: 44px;
+  width: 64px;
+  height: 64px;
   opacity: 0.9;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 50%;
   cursor: pointer;
   z-index: 40;
-  font-size: 20px;
+  font-size: 30px;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -471,7 +471,7 @@ a { color: var(--gold); }
 }
 .retro-trigger:hover { opacity: 1; transform: scale(1.08); }
 @media (max-width: 640px) {
-  .retro-trigger { bottom: 0.75rem; left: 0.75rem; width: 40px; height: 40px; font-size: 18px; }
+  .retro-trigger { bottom: 0.75rem; left: 0.75rem; width: 54px; height: 54px; font-size: 26px; }
 }
 
 /* RETRO MODE */
