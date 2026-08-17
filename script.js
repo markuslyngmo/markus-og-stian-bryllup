@@ -60,7 +60,7 @@ const WEDDING = {
   transport: "Legg inn informasjon om kollektivtransport eller ev. buss til/fra festen hit.",
 
   rsvpDeadline: "1. mai 2027",
-  rsvpFormEndpoint: "", // sett inn f.eks. en Formspree-URL her for at skjemaet skal sende noe sted, se README
+  rsvpFormEndpoint: "https://formspree.io/f/xjybajlj",
 
   program: [
     { time: "13:30", title: "Gjestene ankommer vielsesstedet" },
