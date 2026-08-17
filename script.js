@@ -171,6 +171,33 @@ function updateCountdown() {
 }
 
 /* ============================================================
+   OSA — navnefelt for ekstra gjester
+   ============================================================ */
+function renderGuestNameFields() {
+  const guestsInput = document.getElementById('guests');
+  const container = document.getElementById('guestNames');
+  const count = Math.max(1, Math.min(10, parseInt(guestsInput.value, 10) || 1));
+  const extra = count - 1;
+
+  container.innerHTML = '';
+  for (let i = 1; i <= extra; i++) {
+    const row = document.createElement('div');
+    row.className = 'form-row';
+    row.innerHTML = `
+      <label for="guestName${i}">Navn på gjest ${i + 1}</label>
+      <input type="text" id="guestName${i}" name="guestName${i}" required>
+    `;
+    container.appendChild(row);
+  }
+}
+
+function initGuestNameFields() {
+  const guestsInput = document.getElementById('guests');
+  guestsInput.addEventListener('input', renderGuestNameFields);
+  renderGuestNameFields();
+}
+
+/* ============================================================
    RSVP FORM (client-side demo — se README for backend-kobling)
    ============================================================ */
 function initRsvpForm() {
@@ -295,6 +322,7 @@ function initEasterEggs() {
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   render();
+  initGuestNameFields();
   initRsvpForm();
   initEasterEggs();
   updateCountdown();
