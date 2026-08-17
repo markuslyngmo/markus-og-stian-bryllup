@@ -5,7 +5,7 @@
 const WEDDING = {
   partner1: "Markus",
   partner2: "Stian",
-  date: "2027-07-07T14:00:00", // ISO-dato+klokkeslett for vielsen, brukes til nedtelling og kalender
+  date: "2027-08-07T14:00:00", // ISO-dato+klokkeslett for vielsen, brukes til nedtelling og kalender
 
   ceremony: {
     time: "14:00",
