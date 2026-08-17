@@ -256,9 +256,6 @@ function initGuestDetailFields() {
 function initRsvpForm() {
   const form = document.getElementById('rsvpForm');
   const note = document.getElementById('rsvpNote');
-  if (!WEDDING.rsvpFormEndpoint) {
-    note.textContent = 'Merk: skjemaet må kobles til en mottaker (f.eks. Formspree) for å faktisk sende svar videre — se README.md.';
-  }
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!WEDDING.rsvpFormEndpoint) {
