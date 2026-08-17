@@ -181,13 +181,21 @@ function renderGuestNameFields() {
 
   container.innerHTML = '';
   for (let i = 1; i <= extra; i++) {
-    const row = document.createElement('div');
-    row.className = 'form-row';
-    row.innerHTML = `
+    const nameRow = document.createElement('div');
+    nameRow.className = 'form-row';
+    nameRow.innerHTML = `
       <label for="guestName${i}">Navn på gjest ${i + 1}</label>
       <input type="text" id="guestName${i}" name="guestName${i}" required>
     `;
-    container.appendChild(row);
+    container.appendChild(nameRow);
+
+    const songRow = document.createElement('div');
+    songRow.className = 'form-row';
+    songRow.innerHTML = `
+      <label for="songWish${i + 1}">Sangønske for gjest ${i + 1} (valgfritt)</label>
+      <input type="text" id="songWish${i + 1}" name="songWish${i + 1}" placeholder="Én sang du gjerne vil høre på dansegulvet">
+    `;
+    container.appendChild(songRow);
   }
 }
 
