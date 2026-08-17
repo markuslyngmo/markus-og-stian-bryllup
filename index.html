@@ -18,15 +18,20 @@
   }
 </script>
 
+<div class="lang-toggle" id="langToggle">
+  <button type="button" class="lang-btn" data-lang="no">NO</button>
+  <button type="button" class="lang-btn" data-lang="en">EN</button>
+</div>
+
 <div id="passwordGate">
   <div class="password-box">
-    <p class="eyebrow">Vi skal gifte oss</p>
-    <h2>Skriv inn passord</h2>
-    <p class="password-hint">Du har fått passordet av brudeparet</p>
+    <p class="eyebrow" data-i18n="eyebrow">Vi skal gifte oss</p>
+    <h2 data-i18n="passwordTitle">Skriv inn passord</h2>
+    <p class="password-hint" data-i18n="passwordHint">Du har fått passordet av brudeparet</p>
     <form id="passwordForm">
-      <input type="password" id="passwordInput" autocomplete="off" placeholder="Passord" required>
-      <button type="submit" class="btn btn-primary">Åpne siden</button>
-      <p id="passwordError" class="password-error">Feil passord, prøv igjen.</p>
+      <input type="password" id="passwordInput" autocomplete="off" placeholder="Passord" data-i18n-placeholder="passwordPlaceholder" required>
+      <button type="submit" class="btn btn-primary" data-i18n="passwordSubmit">Åpne siden</button>
+      <p id="passwordError" class="password-error" data-i18n="passwordError">Feil passord, prøv igjen.</p>
     </form>
   </div>
 </div>
@@ -37,141 +42,141 @@
 
 <header class="hero">
   <div class="hero-inner">
-    <p class="eyebrow">Vi skal gifte oss</p>
+    <p class="eyebrow" data-i18n="eyebrow">Vi skal gifte oss</p>
     <h1 id="coupleNames">Navn &amp; Navn</h1>
     <p class="hero-date" id="heroDate">00. måned 2026</p>
     <div class="divider" aria-hidden="true">❧</div>
-    <p class="hero-intro">Vi vil så gjerne at du er med og feirer dagen med oss.</p>
+    <p class="hero-intro" data-i18n="heroIntro">Vi vil så gjerne at du er med og feirer dagen med oss.</p>
     <div class="countdown" id="countdown">
-      <div class="cd-box"><span class="cd-num" id="cdDays">–</span><span class="cd-label">dager</span></div>
-      <div class="cd-box"><span class="cd-num" id="cdHours">–</span><span class="cd-label">timer</span></div>
-      <div class="cd-box"><span class="cd-num" id="cdMinutes">–</span><span class="cd-label">minutter</span></div>
+      <div class="cd-box"><span class="cd-num" id="cdDays">–</span><span class="cd-label" data-i18n="days">dager</span></div>
+      <div class="cd-box"><span class="cd-num" id="cdHours">–</span><span class="cd-label" data-i18n="hours">timer</span></div>
+      <div class="cd-box"><span class="cd-num" id="cdMinutes">–</span><span class="cd-label" data-i18n="minutes">minutter</span></div>
     </div>
-    <a href="#osa" class="btn btn-primary hero-cta">Svar på invitasjonen</a>
+    <a href="#osa" class="btn btn-primary hero-cta" data-i18n="heroCta">Svar på invitasjonen</a>
   </div>
   <nav class="quicknav">
-    <a href="#info">Info</a>
-    <a href="#osa">OSA</a>
-    <a href="#program">Program</a>
-    <a href="#praktisk">Praktisk</a>
-    <a href="#kontakt">Kontakt</a>
-    <a href="#gaver">Gaver</a>
+    <a href="#info" data-i18n="navInfo">Info</a>
+    <a href="#osa" data-i18n="navOsa">OSA</a>
+    <a href="#program" data-i18n="navProgram">Program</a>
+    <a href="#praktisk" data-i18n="navPraktisk">Praktisk</a>
+    <a href="#kontakt" data-i18n="navKontakt">Kontakt</a>
+    <a href="#gaver" data-i18n="navGaver">Gaver</a>
   </nav>
 </header>
 
 <main>
 
   <section id="info" class="section">
-    <h2>Dato &amp; sted</h2>
+    <h2 data-i18n="infoTitle">Dato &amp; sted</h2>
     <div class="divider" aria-hidden="true">❧</div>
     <div class="venue-grid">
       <div class="venue-card">
-        <h3>Vielse</h3>
+        <h3 data-i18n="ceremonyLabel">Vielse</h3>
         <p class="venue-time" id="ceremonyTime">Kl. 00:00</p>
         <p class="venue-name" id="ceremonyName">Navn på kirke/sted</p>
         <p class="venue-address" id="ceremonyAddress">Adresse, Postnr Sted</p>
-        <a class="link-map" id="ceremonyMapLink" href="#" target="_blank" rel="noopener">Åpne i kart ↗</a>
+        <a class="link-map" id="ceremonyMapLink" href="#" target="_blank" rel="noopener" data-i18n="openMap">Åpne i kart ↗</a>
       </div>
       <div class="venue-card">
-        <h3>Middag &amp; fest</h3>
+        <h3 data-i18n="receptionLabel">Middag &amp; fest</h3>
         <p class="venue-time" id="receptionTime">Kl. 00:00</p>
         <p class="venue-name" id="receptionName">Navn på selskapslokale</p>
         <p class="venue-address" id="receptionAddress">Adresse, Postnr Sted</p>
-        <a class="link-map" id="receptionMapLink" href="#" target="_blank" rel="noopener">Åpne i kart ↗</a>
+        <a class="link-map" id="receptionMapLink" href="#" target="_blank" rel="noopener" data-i18n="openMap">Åpne i kart ↗</a>
       </div>
     </div>
 
     <div class="info-box">
-      <h4>Veibeskrivelse</h4>
+      <h4 data-i18n="directionsLabel">Veibeskrivelse</h4>
       <p id="directions">Legg inn veibeskrivelse hit — f.eks. avkjøring, holdeplass, gangavstand mellom kirke og selskapslokale.</p>
     </div>
     <div class="info-box">
-      <h4>Parkering</h4>
+      <h4 data-i18n="parkingLabel">Parkering</h4>
       <p id="parking">Legg inn informasjon om parkeringsmuligheter hit.</p>
     </div>
     <div class="info-box">
-      <h4>Transport</h4>
+      <h4 data-i18n="transportLabel">Transport</h4>
       <p id="transport">Legg inn informasjon om kollektivtransport, buss til/fra festen o.l. hit.</p>
     </div>
 
     <div class="add-calendar">
-      <a id="calendarLink" class="btn btn-outline" href="#">+ Legg til i kalender</a>
+      <a id="calendarLink" class="btn btn-outline" href="#" data-i18n="addCalendar">+ Legg til i kalender</a>
     </div>
   </section>
 
   <section id="osa" class="section section-alt">
-    <h2>OSA</h2>
+    <h2 data-i18n="osaTitle">OSA</h2>
     <div class="divider" aria-hidden="true">❧</div>
-    <p class="rsvp-deadline">Vi trenger svar innen <strong id="rsvpDeadline">00. måned 2026</strong></p>
+    <p class="rsvp-deadline"><span data-i18n="rsvpDeadlineLabel">Vi trenger svar innen</span> <strong id="rsvpDeadline">00. måned 2026</strong></p>
 
     <form class="rsvp-form" id="rsvpForm">
       <div class="form-row">
-        <label for="fullName">Fullt navn</label>
+        <label for="fullName" data-i18n="fullNameLabel">Fullt navn</label>
         <input type="text" id="fullName" name="fullName" required>
       </div>
       <div class="form-row">
-        <label for="email">E-post</label>
+        <label for="email" data-i18n="emailLabel">E-post</label>
         <input type="email" id="email" name="email" required>
       </div>
       <div class="form-row">
-        <label>Kommer du?</label>
+        <label data-i18n="attendingLabel">Kommer du?</label>
         <div class="radio-group">
-          <label class="radio-opt"><input type="radio" name="attending" value="ja" required> Ja, gleder meg!</label>
-          <label class="radio-opt"><input type="radio" name="attending" value="nei"> Kan dessverre ikke</label>
+          <label class="radio-opt"><input type="radio" name="attending" value="ja" required> <span data-i18n="attendingYes">Ja, gleder meg!</span></label>
+          <label class="radio-opt"><input type="radio" name="attending" value="nei"> <span data-i18n="attendingNo">Kan dessverre ikke</span></label>
         </div>
       </div>
       <div class="form-row">
-        <label for="guests">Antall gjester (inkl. deg selv)</label>
+        <label for="guests" data-i18n="guestsLabel">Antall gjester (inkl. deg selv)</label>
         <input type="number" id="guests" name="guests" min="1" max="10" value="1">
       </div>
       <div id="guestDetails"></div>
       <div class="form-row">
-        <label for="message">Hilsen til brudeparet (valgfritt)</label>
+        <label for="message" data-i18n="messageLabel">Hilsen til brudeparet (valgfritt)</label>
         <textarea id="message" name="message" rows="3"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Send svar</button>
+      <button type="submit" class="btn btn-primary" data-i18n="submitLabel">Send svar</button>
       <p class="form-note" id="rsvpNote"></p>
     </form>
   </section>
 
   <section id="program" class="section">
-    <h2>Dagens program</h2>
+    <h2 data-i18n="programTitle">Dagens program</h2>
     <div class="divider" aria-hidden="true">❧</div>
     <ol class="timeline" id="timeline">
       <!-- fylles av script.js -->
     </ol>
-    <p class="program-end">Arrangementet avsluttes ca. kl. <strong id="endTime">00:00</strong></p>
+    <p class="program-end"><span data-i18n="programEndLabel">Arrangementet avsluttes ca. kl.</span> <strong id="endTime">00:00</strong></p>
   </section>
 
   <section id="praktisk" class="section section-alt">
-    <h2>Praktiske detaljer</h2>
+    <h2 data-i18n="praktiskTitle">Praktiske detaljer</h2>
     <div class="divider" aria-hidden="true">❧</div>
 
     <div class="info-box">
-      <h4>Kleskode</h4>
+      <h4 data-i18n="dressCodeLabel">Kleskode</h4>
       <p id="dressCode">Legg inn kleskode hit, f.eks. «Pynt deg» / Mørk dress / Antrekk nr. 2.</p>
     </div>
 
-    <h3 class="sub-heading">Anbefalte hoteller</h3>
+    <h3 class="sub-heading" data-i18n="hotelsTitle">Anbefalte hoteller</h3>
     <div class="hotel-grid" id="hotelGrid">
       <!-- fylles av script.js -->
     </div>
   </section>
 
   <section id="kontakt" class="section">
-    <h2>Kontaktpersoner</h2>
+    <h2 data-i18n="kontaktTitle">Kontaktpersoner</h2>
     <div class="divider" aria-hidden="true">❧</div>
 
     <div class="contact-grid">
       <div class="contact-card">
-        <h4>Toastmaster</h4>
+        <h4 data-i18n="toastmasterLabel">Toastmaster</h4>
         <p id="toastmasterName">Navn</p>
         <p><a id="toastmasterPhone" href="tel:">Telefon</a></p>
         <p><a id="toastmasterEmail" href="mailto:">E-post</a></p>
-        <p class="speech-deadline">Frist for å melde inn tale/innslag: <strong id="speechDeadline">00. måned 2026</strong></p>
+        <p class="speech-deadline"><span data-i18n="speechDeadlineLabel">Frist for å melde inn tale/innslag:</span> <strong id="speechDeadline">00. måned 2026</strong></p>
       </div>
       <div class="contact-card">
-        <h4>Brudeparet</h4>
+        <h4 data-i18n="coupleLabel">Brudeparet</h4>
         <p id="contact1">Navn — Telefon</p>
         <p id="contact2">Navn — Telefon</p>
         <p><a id="coupleEmail" href="mailto:">E-post</a></p>
@@ -180,14 +185,14 @@
   </section>
 
   <section id="gaver" class="section section-alt">
-    <h2>Gaver</h2>
+    <h2 data-i18n="gaverTitle">Gaver</h2>
     <div class="divider" aria-hidden="true">❧</div>
-    <p class="gift-intro" id="giftIntro">Deres tilstedeværelse er den beste gaven — men ønsker dere å gi noe, setter vi stor pris på følgende:</p>
+    <p class="gift-intro" id="giftIntro" data-i18n="giftIntro">Deres tilstedeværelse er den beste gaven — men ønsker dere å gi noe, setter vi stor pris på følgende:</p>
     <div class="gift-links" id="giftLinks">
       <!-- fylles av script.js -->
     </div>
     <div class="info-box">
-      <h4>Pengegave</h4>
+      <h4 data-i18n="giftMoneyLabel">Pengegave</h4>
       <p id="giftMoneyNote">Legg inn ev. kontonummer/Vipps-nummer og retningslinjer for pengegaver her.</p>
     </div>
   </section>
@@ -195,7 +200,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>Vi gleder oss til å feire med deg! ❧</p>
+  <p data-i18n="footerText">Vi gleder oss til å feire med deg! ❧</p>
 </footer>
 
 <script src="script.js"></script>
