@@ -171,45 +171,49 @@ function updateCountdown() {
 }
 
 /* ============================================================
-   OSA — navnefelt for ekstra gjester
+   OSA — én boks per gjest (navn, sang, tale, matallergi)
    ============================================================ */
-function renderGuestNameFields() {
+function renderGuestDetailFields() {
   const guestsInput = document.getElementById('guests');
-  const container = document.getElementById('guestNames');
+  const container = document.getElementById('guestDetails');
   const count = Math.max(1, Math.min(10, parseInt(guestsInput.value, 10) || 1));
-  const extra = count - 1;
 
   container.innerHTML = '';
-  for (let i = 1; i <= extra; i++) {
-    const nameRow = document.createElement('div');
-    nameRow.className = 'form-row';
-    nameRow.innerHTML = `
-      <label for="guestName${i}">Navn på gjest ${i + 1}</label>
-      <input type="text" id="guestName${i}" name="guestName${i}" required>
-    `;
-    container.appendChild(nameRow);
+  for (let i = 1; i <= count; i++) {
+    const card = document.createElement('div');
+    card.className = 'guest-card';
 
-    const songRow = document.createElement('div');
-    songRow.className = 'form-row';
-    songRow.innerHTML = `
-      <label for="songWish${i + 1}">Sangønske for gjest ${i + 1} (valgfritt)</label>
-      <input type="text" id="songWish${i + 1}" name="songWish${i + 1}" placeholder="Én sang du gjerne vil høre på dansegulvet">
-    `;
-    container.appendChild(songRow);
+    const nameFieldHtml = i === 1
+      ? '<p class="guest-card-title">Gjest 1 (deg)</p>'
+      : `
+        <div class="form-row">
+          <label for="guestName${i}">Navn på gjest ${i}</label>
+          <input type="text" id="guestName${i}" name="guestName${i}" required>
+        </div>
+      `;
 
-    const speechRow = document.createElement('div');
-    speechRow.className = 'form-row';
-    speechRow.innerHTML = `
-      <label class="radio-opt"><input type="checkbox" id="speechWish${i + 1}" name="speechWish${i + 1}"> Gjest ${i + 1} ønsker å holde en tale</label>
+    card.innerHTML = `
+      ${nameFieldHtml}
+      <div class="form-row">
+        <label for="songWish${i}">Sangønske til festen (valgfritt)</label>
+        <input type="text" id="songWish${i}" name="songWish${i}" placeholder="Én sang du gjerne vil høre på dansegulvet">
+      </div>
+      <div class="form-row">
+        <label class="radio-opt"><input type="checkbox" id="speechWish${i}" name="speechWish${i}"> Ønsker å holde en tale</label>
+      </div>
+      <div class="form-row">
+        <label for="allergies${i}">Matallergier / spesialdiett (valgfritt)</label>
+        <textarea id="allergies${i}" name="allergies${i}" rows="2" placeholder="F.eks. gluten, nøtter, vegetar, veganer …"></textarea>
+      </div>
     `;
-    container.appendChild(speechRow);
+    container.appendChild(card);
   }
 }
 
-function initGuestNameFields() {
+function initGuestDetailFields() {
   const guestsInput = document.getElementById('guests');
-  guestsInput.addEventListener('input', renderGuestNameFields);
-  renderGuestNameFields();
+  guestsInput.addEventListener('input', renderGuestDetailFields);
+  renderGuestDetailFields();
 }
 
 /* ============================================================
@@ -337,7 +341,7 @@ function initEasterEggs() {
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   render();
-  initGuestNameFields();
+  initGuestDetailFields();
   initRsvpForm();
   initEasterEggs();
   updateCountdown();
