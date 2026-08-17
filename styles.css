@@ -146,7 +146,7 @@ a { color: var(--gold); }
   background: var(--gold);
   color: #fff;
 }
-.btn-primary:hover { background: #a17f4c; }
+.btn-primary:hover { background: #c04b78; }
 .btn-outline {
   background: transparent;
   color: var(--gold);
