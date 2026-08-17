@@ -8,11 +8,6 @@
   --gold-soft: #f6d3e2;
   --line: #d7e6f2;
   --radius: 4px;
-  --cursor-emoji: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAJVklEQVR4AeyXCXAT1xnHv13trg5blkHYwsIY22BjDJbBpLiAQw4CnYQJ5LKnQ2ZyNRlP2qRNmk6uaYPacTuEhmkyQEu4MlwJsaE0lAYKGHPFCGOB7djCl2x8yZJ1H7ta7dmVO3ZpvAwCZjrpDDvv02r/7/u/77dv30q7KHzPt3uAd3uB7s3gvRm82xm4W///5xo0lZjunz9//m6j0agZm4HCwsJy03zTBulY9qSKC4vLTMWmvxQUFOilnNFWVFT0gDTOrtzcXN2ocAcfssWAA+BF4aFFi0xPnTv1senQoY9mKNXKdQIvptysRpinaYUCW61P1z9zYN/vflBV9foigiAqERTJDYfD/M18t9JlAYuLs/pm5aa33L+0ZK8/rG3mGOL6rJkZc/NyUg5JAwpSTGj29kMtaZM19pUPlmxV4OkNudmzLpWW5q9O16vOut3uyARDgoIsYOXzS2b85IkFZaUzk6BkphoW5WthzbIseP2lksWiCIjc2JS3qbjiR3Nyls83QOnsZFhSmApPP5yb9OzqnLmiWIfJeRLRZAG1iC81byqhYwb6oafeAn0NVyBDYEEpMPkAZlnA3u6mmQtyJqm5YYeUfxmGrraAOhSAXL0mvaPjmBrucJMF5IcgaWREgAA+GYw5+dDpYQCfMgtoF6eA38pXGm5yqnGlQWHt90JaZh6QWCpc9zHSSU1CfRe8uLzr1ioql0K5gxTOiDBNnwosRUF+1jTQKTGAoOACs1mU8wgBzCPSMb54dh6IbAwmawjIMU4DkeKpNEpDynkS0WQBHYN2q0BTf8exMFi6WkAh7dmQmxQFZpt0fWUBCVpTR/s81jQdClb7txCKOkFLIL5omNyX9/NNsURg5HJkASv+dHoo5vdvoL0Rd4HeCGiEEyhP4N3l7++/JjdIXHvI/OcI4x95mw5S9pxJBtCISibs9h5whX0H4v13GhMAW6vNhKP242W9oH2t/nSD2tnYAK0XLNwRS/vjxz58ZW1rdTnx3WJ1dWbMfmR9WT+qf6PuQqvO29kNvU025MvTbQuy0gwv1+8wT/6uJ9HjGwGR1up1WaJIbKVI7kxykroCmZqVrM+fA5Qug9Ab0lZkZGXt4YS5n9fvfnPaWIHmfebMKT5ic4yHE5npKc97QD0lxZgJ6KQ0nETwH07JzNys1eFHL+/89WxRBGmFjDkT248D1lY9ZxQF/BAdJdf0t1xtC13vEZodFJwfioFliIGgx4s4O21hkeWf1BCpx6/sfKe4bcebkxFcsR9YrmK4o6Ob9njpDkcIzvUEoa7bDzQZRUbsPTGRY4tUOlW19fMPHqwzm6W7LTG4eNY4oIiiuSwbWzhwxbqr6cyptR29g36Hl4QTjb0w7CPB7grChRNnttgbL22OBvwGRKPZE+SEJ2MkZRrpH9jTUnv0ufrm7iFOQKC2qQ9sfV7wR6LiJcuV2oG21l+xkchUJY7v1kxn50uFE57JccBUPWHlGeakMT/v4VZmUsap/pgtxjIAAi81FrpCAFvaoid0Kt0HDBXtZMhITtQXRgm15p/JOt2DsxcuQ460uKSbNgoiz4Mo+YbDLLv+/NDFVVUHP6WjsRaU5zNZmswSJcJE2zjgfZXbKCow8rLAc46lppydSoFNpSgKSDICNB0FQSr4dMn0R8Rk1dccy85wdXRVLn9/13ZeoN/hBd6dnJq8PlmJGqlo3ENCNBoFlue44uwpxQ2bXv1C+jpzqLvv1bbm88el6UuYcRwwfkYPvPXZQGyg/71IMGxPS8LmiYAAgiAgSqs7HgaC+1lgeGjEO9BXsfqPf/si7il59vd9kTD106DfjykxVLpb4x5p4iUPgaLKrBRiVcDpygy7nC9v/81nOyq3Wam4L9H4L8C46aGP/tF6+pqrysuiTiWBA0EQoFAoQIEq4Joruum67dtXK7bUXoznjsXKtz/tsnQ43gvRvINQEqMeAsdBAEC6R8ivSbfzhceqak7XANz2YxcKMpuNwj0UD4JCmj0EQQFBEEBRgEsevv3tM24nTNgANp51ODlAY+hormLUI10BZDAsOJ/cVm+XsSQkSWUn5qkxTKXAsKQoTYPX6xHja5FlOcBRdJ6UjUgxoWUbUnQoimIsy4LX5xUDgaC0bgVEACF7QvJtCLKACoWI4AiCAs9COBjo4GLREC5lpquRImlsWUBMFBFCmnKF1EuHQ91MlIoqFShMViH61QumGyXfHTWp7ETfmnl69tFCPbm6QHronKU+/MICQ89bK/Lh3RX5WdXl5RLCRM8T+brwmoVZ3KoiA7y4aHr3K8tyj733RDFU/Xix9rmy2YaJjsQUWcDSGSnhFQvzBh8rLYCluVOb5man1RSY5tA64zSDrXquKDf0dEeDa/l9M8lHFxdCSU6aY5kpe9vs/GxGb8xQE0r1JDlPIpos4Ehbp4cXhFZRFAAwhGk8V7dV+scYlI71xqf2zJIbuNIKVCxG23nJyPGim+Rwi8/jq0dEMV0QxDlynkQ0VC6p93B7MOQe6aYDAWB5XmO+GPI5rrWdJL1eVKWd8pqcJ66RPr+NDIVYEQS137otEnK598b8Xi2mJFZWv7n4jh77ZQHNABwdirTzChzUqal55kIgQsPudTzHd+oyjM+YF/7nfTkONhbhYacFRdGYSqudV1EDvLuv56tQiPxKlZJyfxKRLjvzY96b7dGbdYgMdz0mQBDDVRpQA/ZSzVU3FyPNmEKhzM0zFMr5PC7fWRAFEsUwVbz/+T0NXp4TPuEYJqhM0U6Na7cbNwXU9F2xIyLfi4oC7w3++x+Aau8/4vH4jlNKzS/kClXWWIPAsY0Yho2/g1Bd4jc8w+zsGvQ+u7as6LZvFlnApUuXan/Zlf7AwcaB1CMtTlU9BYo40ItnrtOHr/k+OdzDrFxStuTD8vLyUT3eZ1ppSsqbM+eR7XXt2r9e7kmKa/GoqKlh9lwaPHTQ5i3rh+R1paWlKXE90ZADRAPhwCpUiW48au0dOnDR1mZ1wPhPS6eXbRqhuA0iCI/39vc+PFZIcAhP4Sjyh3O2IcX+2ubGMT2+//KUpd0Tie1gBH4tgiDxH/u4nFDIAQptLW0HbG22/GGXqywcpnZKI0WlGG02m425ar268eIFS2HjpcaTo6L00draulfyLBoYGFgWCIXekKQbm9hsbV7fUN+QbrFYvrmx41bf5QBv5fmf9n/vAf8FAAD//7wWJ1EAAAAGSURBVAMATOVOjTV6A7YAAAAASUVORK5CYII=") 6 4, auto;
-}
-
-* {
-  cursor: var(--cursor-emoji) !important;
 }
 
 * { box-sizing: border-box; }
@@ -53,21 +48,6 @@ a { color: var(--gold); }
   font-size: 1.3rem;
   margin: 0.8rem 0 1.8rem;
   letter-spacing: 0.5em;
-}
-
-/* Click-anywhere heart burst */
-.heart-pop {
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 998;
-  will-change: transform, opacity;
-  animation: heart-pop-anim 0.8s cubic-bezier(.2,.8,.3,1) forwards;
-}
-@keyframes heart-pop-anim {
-  0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
-  55%  { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1); opacity: 1; }
-  100% { transform: translate(calc(-50% + var(--dx) * 1.4), calc(-50% + var(--dy) * 1.4 - 14px)) scale(0.5); opacity: 0; }
 }
 
 /* Hero */
