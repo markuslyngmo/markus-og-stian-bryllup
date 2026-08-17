@@ -8,6 +8,11 @@
   --gold-soft: #f6d3e2;
   --line: #d7e6f2;
   --radius: 4px;
+  --cursor-emoji: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0NCcgaGVpZ2h0PSc0NCc+PHRleHQgeD0nMicgeT0nMzYnIGZvbnQtc2l6ZT0nMzInPvCfka/wn4+84oCN4pmC77iPPC90ZXh0Pjwvc3ZnPg==") 8 8, auto;
+}
+
+* {
+  cursor: var(--cursor-emoji) !important;
 }
 
 * { box-sizing: border-box; }
@@ -48,31 +53,6 @@ a { color: var(--gold); }
   font-size: 1.3rem;
   margin: 0.8rem 0 1.8rem;
   letter-spacing: 0.5em;
-}
-
-/* Falling petals */
-.petals {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 5;
-  overflow: hidden;
-}
-.petal {
-  position: absolute;
-  top: -5vh;
-  line-height: 1;
-  opacity: 0.55;
-  animation: fall linear infinite;
-  user-select: none;
-}
-@keyframes fall {
-  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
-  20%  { transform: translate(24px, 20vh) rotate(18deg) scale(1.15); }
-  40%  { transform: translate(-20px, 40vh) rotate(-14deg) scale(0.95); }
-  60%  { transform: translate(22px, 60vh) rotate(16deg) scale(1.15); }
-  80%  { transform: translate(-18px, 82vh) rotate(-10deg) scale(0.95); }
-  100% { transform: translate(0, 105vh) rotate(300deg) scale(1); opacity: 0.15; }
 }
 
 /* Click-anywhere heart burst */
