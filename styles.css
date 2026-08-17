@@ -14,6 +14,58 @@
 
 html { scroll-behavior: smooth; }
 
+body.locked > *:not(#passwordGate) { display: none !important; }
+
+#passwordGate {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at top, var(--cream-alt), var(--cream));
+  padding: 1.5rem;
+}
+body.locked #passwordGate { display: flex; }
+
+.password-box {
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+}
+.password-box h2 {
+  font-size: 1.8rem;
+  margin: 0.4rem 0 0.6rem;
+}
+.password-hint {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+.password-box input[type="password"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: var(--cream);
+}
+.password-box .btn { width: 100%; border: none; }
+.password-error {
+  display: none;
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+.password-error.show { display: block; }
+
 body {
   margin: 0;
   background: var(--cream);

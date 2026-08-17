@@ -11,7 +11,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="locked">
+<script>
+  if (localStorage.getItem('wedding_unlocked') === 'true') {
+    document.body.classList.remove('locked');
+  }
+</script>
+
+<div id="passwordGate">
+  <div class="password-box">
+    <p class="eyebrow">Vi skal gifte oss</p>
+    <h2>Skriv inn passord</h2>
+    <p class="password-hint">Du har fått passordet av brudeparet</p>
+    <form id="passwordForm">
+      <input type="password" id="passwordInput" autocomplete="off" placeholder="Passord" required>
+      <button type="submit" class="btn btn-primary">Åpne siden</button>
+      <p id="passwordError" class="password-error">Feil passord, prøv igjen.</p>
+    </form>
+  </div>
+</div>
 
 <div class="retro-banner" id="retroBanner">★ RETRO MODE ACTIVATED ★ BORN IN '89 &amp; '90 ★ WELCOME TO THE WWW ★</div>
 <div class="badge-9089" id="badge9089"></div>

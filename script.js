@@ -1,4 +1,38 @@
 /* ============================================================
+   PASSORDBESKYTTELSE
+   Merk: dette er kun en lett sperre (klient-side), ikke ekte
+   sikkerhet — endre WEDDING_PASSWORD_HASH ved å regne ut en
+   SHA-256-hash av det nye passordet.
+   ============================================================ */
+const WEDDING_PASSWORD_HASH = "1bdb7c2d8f2972c4eab8404826b21c6130007d3abd1a20984e5c5eda9c2eca78";
+
+async function sha256Hex(text) {
+  const enc = new TextEncoder().encode(text);
+  const hashBuf = await crypto.subtle.digest('SHA-256', enc);
+  return Array.from(new Uint8Array(hashBuf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+function initPasswordGate() {
+  const form = document.getElementById('passwordForm');
+  const input = document.getElementById('passwordInput');
+  const error = document.getElementById('passwordError');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const hash = await sha256Hex(input.value.trim());
+    if (hash === WEDDING_PASSWORD_HASH) {
+      localStorage.setItem('wedding_unlocked', 'true');
+      document.body.classList.remove('locked');
+    } else {
+      error.classList.add('show');
+      input.value = '';
+      input.focus();
+    }
+  });
+}
+
+/* ============================================================
    REDIGER HER: all informasjon om bryllupet samles i dette
    objektet. Resten av siden bygges automatisk ut fra dette.
    ============================================================ */
@@ -340,6 +374,7 @@ function initEasterEggs() {
    INIT
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
+  initPasswordGate();
   render();
   initGuestDetailFields();
   initRsvpForm();
