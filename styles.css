@@ -451,19 +451,28 @@ a { color: var(--gold); }
 /* Secret retro trigger button */
 .retro-trigger {
   position: fixed;
-  bottom: 0.6rem;
-  left: 0.6rem;
-  width: 18px;
-  height: 18px;
-  opacity: 0.15;
-  background: transparent;
-  border: none;
+  bottom: 1rem;
+  left: 1rem;
+  width: 44px;
+  height: 44px;
+  opacity: 0.9;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 50%;
   cursor: pointer;
   z-index: 40;
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(46,59,74,0.15);
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
-.retro-trigger:hover { opacity: 0.5; }
+.retro-trigger:hover { opacity: 1; transform: scale(1.08); }
+@media (max-width: 640px) {
+  .retro-trigger { bottom: 0.75rem; left: 0.75rem; width: 40px; height: 40px; font-size: 18px; }
+}
 
 /* RETRO MODE */
 body.retro-mode {
