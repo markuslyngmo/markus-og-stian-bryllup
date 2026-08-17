@@ -43,21 +43,21 @@ const WEDDING = {
 
   ceremony: {
     time: "14:00",
-    name: "Navn på kirke / vielsessted",
-    address: "Gateadresse 1, 0000 Sted",
-    mapUrl: "https://maps.google.com/?q=Gateadresse+1+0000+Sted"
+    name: "Sted kunngjøres snart",
+    address: "Vi oppdaterer så snart vielsesstedet er bestemt",
+    mapUrl: ""
   },
   reception: {
     time: "17:00",
-    name: "Navn på selskapslokale",
-    address: "Gateadresse 2, 0000 Sted",
-    mapUrl: "https://maps.google.com/?q=Gateadresse+2+0000+Sted"
+    name: "Ekebergrestauranten",
+    address: "Kongsveien 15, 0193 Oslo",
+    mapUrl: "https://maps.google.com/?q=Ekebergrestauranten+Kongsveien+15+0193+Oslo"
   },
   endTime: "01:00",
 
-  directions: "Legg inn veibeskrivelse hit — f.eks. avkjøring, holdeplass eller gangavstand mellom kirke og selskapslokale.",
+  directions: "Legg inn veibeskrivelse hit — f.eks. avkjøring, holdeplass eller gangavstand mellom vielsesstedet og Ekebergrestauranten.",
   parking: "Legg inn informasjon om parkeringsmuligheter hit.",
-  transport: "Legg inn informasjon om kollektivtransport eller ev. buss til/fra festen hit.",
+  transport: "Trikk 13/19 fra Oslo S til holdeplassen Ekebergparken, ca. 10 minutters kjøretur — trikken går hvert 10. minutt.",
 
   rsvpDeadline: "1. mai 2027",
   rsvpFormEndpoint: "https://formspree.io/f/xjybajlj",
@@ -110,6 +110,17 @@ function fillText(id, text) {
   if (el) el.textContent = text;
 }
 
+function setMapLink(id, url) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (url && url !== '#') {
+    el.href = url;
+    el.style.display = '';
+  } else {
+    el.style.display = 'none';
+  }
+}
+
 function render() {
   fillText('coupleNames', `${WEDDING.partner1} & ${WEDDING.partner2}`);
   fillText('heroDate', formatDate(WEDDING.date));
@@ -117,12 +128,12 @@ function render() {
   fillText('ceremonyTime', `Kl. ${WEDDING.ceremony.time}`);
   fillText('ceremonyName', WEDDING.ceremony.name);
   fillText('ceremonyAddress', WEDDING.ceremony.address);
-  document.getElementById('ceremonyMapLink').href = WEDDING.ceremony.mapUrl;
+  setMapLink('ceremonyMapLink', WEDDING.ceremony.mapUrl);
 
   fillText('receptionTime', `Kl. ${WEDDING.reception.time}`);
   fillText('receptionName', WEDDING.reception.name);
   fillText('receptionAddress', WEDDING.reception.address);
-  document.getElementById('receptionMapLink').href = WEDDING.reception.mapUrl;
+  setMapLink('receptionMapLink', WEDDING.reception.mapUrl);
 
   fillText('directions', WEDDING.directions);
   fillText('parking', WEDDING.parking);
