@@ -605,12 +605,22 @@ function showBadge(text) {
   setTimeout(() => badge.classList.remove('show'), 5000);
 }
 
+function updateRetroBannerOffset() {
+  const banner = document.getElementById('retroBanner');
+  if (!banner) return;
+  document.documentElement.style.setProperty('--retro-banner-h', banner.offsetHeight + 'px');
+}
+
 function toggleRetroMode() {
   document.body.classList.toggle('retro-mode');
   if (document.body.classList.contains('retro-mode')) {
     playChime();
     burstConfetti();
     showBadge(t(WEDDING.secretMessage));
+    requestAnimationFrame(updateRetroBannerOffset);
+    window.addEventListener('resize', updateRetroBannerOffset);
+  } else {
+    window.removeEventListener('resize', updateRetroBannerOffset);
   }
 }
 
