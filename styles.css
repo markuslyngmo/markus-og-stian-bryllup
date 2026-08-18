@@ -19,7 +19,8 @@ body.locked > *:not(#passwordGate):not(#langToggle) { display: none !important; 
 .lang-toggle {
   position: fixed;
   top: 1rem;
-  right: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2100;
   display: flex;
   background: #fff;
@@ -33,12 +34,13 @@ body.locked > *:not(#passwordGate):not(#langToggle) { display: none !important; 
   background: transparent;
   color: var(--ink-soft);
   font-family: 'Jost', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  padding: 0.35rem 0.7rem;
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0.9rem;
   border-radius: 999px;
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.2s ease;
 }
 .lang-btn.active {
@@ -46,8 +48,8 @@ body.locked > *:not(#passwordGate):not(#langToggle) { display: none !important; 
   color: #fff;
 }
 @media (max-width: 640px) {
-  .lang-toggle { top: 0.6rem; right: 0.6rem; }
-  .lang-btn { padding: 0.3rem 0.55rem; font-size: 0.7rem; }
+  .lang-toggle { top: 0.6rem; }
+  .lang-btn { padding: 0.32rem 0.65rem; font-size: 0.72rem; }
 }
 
 #passwordGate {
