@@ -245,7 +245,6 @@ function initLangToggle() {
       render();
       renderGuestDetailFields();
       updateCountdown();
-      if (window.__updateSideDotLabels) window.__updateSideDotLabels();
     });
   });
   document.documentElement.lang = getLang();
@@ -674,13 +673,13 @@ function toggleRetroMode() {
 }
 
 /* ============================================================
-   SCROLL REVEAL — sections and dividers fade/rise into view
+   SCROLL REVEAL — window sections and dividers rise into view
    ============================================================ */
 function initScrollReveal() {
-  const sections = document.querySelectorAll('main > section');
-  sections.forEach((s) => s.classList.add('reveal'));
+  const wins = document.querySelectorAll('.win');
+  wins.forEach((w) => w.classList.add('reveal'));
 
-  const targets = [...sections, ...document.querySelectorAll('.divider')];
+  const targets = [...wins, ...document.querySelectorAll('.divider')];
 
   if (!('IntersectionObserver' in window)) {
     targets.forEach((t) => t.classList.add('in-view'));
@@ -700,33 +699,43 @@ function initScrollReveal() {
 }
 
 /* ============================================================
-   SIDE DOT NAVIGATION (desktop) — shows scroll progress
+   BOOT SEQUENCE — a short typewriter intro before the hero
+   content fades in (hero reveals itself via CSS regardless,
+   so nothing depends on this ever completing)
    ============================================================ */
-function initSideDots() {
-  const dots = document.querySelectorAll('.side-dots a');
-  if (!dots.length) return;
+function initBootSequence() {
+  const el = document.getElementById('bootSeq');
+  if (!el) return;
 
-  function updateLabels() {
-    dots.forEach((d) => {
-      const key = 'nav' + d.dataset.section.charAt(0).toUpperCase() + d.dataset.section.slice(1);
-      d.title = ui(key) || '';
-    });
+  const lines = getLang() === 'en'
+    ? ['> loading markus.exe + stian.exe', '> link established ♥', '> status: getting married']
+    : ['> laster markus.exe + stian.exe', '> tilkobling opprettet ♥', '> status: skal gifte oss'];
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = lines[lines.length - 1];
+    return;
   }
-  updateLabels();
-  window.__updateSideDotLabels = updateLabels;
 
-  if (!('IntersectionObserver' in window)) return;
-  const sections = Array.from(dots).map((d) => document.getElementById(d.dataset.section)).filter(Boolean);
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const dot = document.querySelector(`.side-dots a[data-section="${entry.target.id}"]`);
-      if (!dot) return;
-      dots.forEach((d) => d.classList.remove('active'));
-      dot.classList.add('active');
-    });
-  }, { threshold: 0.5 });
-  sections.forEach((s) => io.observe(s));
+  let lineIndex = 0;
+  function typeLine() {
+    if (lineIndex >= lines.length) {
+      setTimeout(() => { el.style.opacity = '0'; }, 500);
+      return;
+    }
+    const line = lines[lineIndex];
+    let charIndex = 0;
+    const iv = setInterval(() => {
+      el.textContent = line.slice(0, charIndex + 1);
+      charIndex++;
+      if (charIndex >= line.length) {
+        clearInterval(iv);
+        lineIndex++;
+        setTimeout(typeLine, 200);
+      }
+    }, 20);
+  }
+  el.style.transition = 'opacity 0.4s ease';
+  typeLine();
 }
 
 function initEasterEggs() {
@@ -777,7 +786,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRsvpForm();
   initEasterEggs();
   initScrollReveal();
-  initSideDots();
+  initBootSequence();
   updateCountdown();
   setInterval(updateCountdown, 1000);
 });
