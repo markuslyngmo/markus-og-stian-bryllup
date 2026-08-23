@@ -134,11 +134,26 @@ a { color: var(--gold); }
 
 .divider {
   text-align: center;
-  color: var(--gold);
-  font-size: 1.3rem;
   margin: 0.8rem 0 1.8rem;
-  letter-spacing: 0.5em;
 }
+.divider-svg { width: 160px; max-width: 55vw; height: 20px; overflow: visible; }
+.divider-line {
+  stroke: var(--gold);
+  stroke-width: 1;
+  stroke-dasharray: 64;
+  stroke-dashoffset: 64;
+  transition: stroke-dashoffset 0.8s ease;
+}
+.divider-line-r { transition-delay: 0.1s; }
+.divider-mark {
+  fill: var(--gold);
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: 80px 10px;
+  transition: opacity 0.4s ease 0.5s, transform 0.4s cubic-bezier(.34,1.56,.64,1) 0.5s;
+}
+.divider.in-view .divider-line { stroke-dashoffset: 0; }
+.divider.in-view .divider-mark { opacity: 1; transform: scale(1); }
 
 /* Hero */
 .hero {
@@ -191,7 +206,15 @@ a { color: var(--gold); }
   font-size: 2.2rem;
   color: var(--gold);
   line-height: 1;
+  display: inline-block;
 }
+.cd-num.flip { animation: cdPop 0.4s ease; }
+@keyframes cdPop {
+  0% { transform: translateY(-8px) scale(0.85); opacity: 0.35; }
+  55% { transform: translateY(2px) scale(1.08); opacity: 1; }
+  100% { transform: translateY(0) scale(1); }
+}
+.cd-box-seconds .cd-num { color: var(--blush); }
 .cd-label {
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -246,6 +269,38 @@ a { color: var(--gold); }
   margin: 0 auto;
   padding: 5rem 1.5rem;
 }
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .divider-line, .divider-mark { transition: none; stroke-dashoffset: 0; opacity: 1; transform: none; }
+  .cd-num.flip { animation: none; }
+}
+
+.side-dots {
+  position: fixed;
+  right: 1.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  flex-direction: column;
+  gap: 0.85rem;
+  z-index: 50;
+}
+@media (min-width: 900px) { .side-dots { display: flex; } }
+.side-dots a {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.side-dots a:hover { background: var(--blush); }
+.side-dots a.active { background: var(--gold); transform: scale(1.5); }
 .section-alt { background: var(--cream-alt); max-width: none; }
 .section-alt > * { max-width: 780px; margin-left: auto; margin-right: auto; }
 .section-alt > *:not(.divider) { display: block; }

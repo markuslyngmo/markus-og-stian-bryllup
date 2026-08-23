@@ -64,6 +64,7 @@ const UI_TEXT = {
     days: "dager",
     hours: "timer",
     minutes: "minutter",
+    seconds: "sekunder",
     heroCta: "Svar på invitasjonen",
     navInfo: "Info",
     navOsa: "OSA",
@@ -143,6 +144,7 @@ const UI_TEXT = {
     days: "days",
     hours: "hours",
     minutes: "minutes",
+    seconds: "seconds",
     heroCta: "RSVP now",
     navInfo: "Info",
     navOsa: "RSVP",
@@ -243,6 +245,7 @@ function initLangToggle() {
       render();
       renderGuestDetailFields();
       updateCountdown();
+      if (window.__updateSideDotLabels) window.__updateSideDotLabels();
     });
   });
   document.documentElement.lang = getLang();
@@ -466,6 +469,17 @@ function render() {
 /* ============================================================
    COUNTDOWN
    ============================================================ */
+function setCdValue(id, value) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const text = String(value);
+  if (el.textContent === text) return;
+  el.textContent = text;
+  el.classList.remove('flip');
+  void el.offsetWidth; // reflow to restart the animation
+  el.classList.add('flip');
+}
+
 function updateCountdown() {
   const now = new Date();
   const target = new Date(WEDDING.date);
@@ -474,14 +488,17 @@ function updateCountdown() {
     fillText('cdDays', '🎉');
     fillText('cdHours', '');
     fillText('cdMinutes', '');
+    fillText('cdSeconds', '');
     return;
   }
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff % 86400000) / 3600000);
   const minutes = Math.floor((diff % 3600000) / 60000);
-  fillText('cdDays', days);
-  fillText('cdHours', hours);
-  fillText('cdMinutes', minutes);
+  const seconds = Math.floor((diff % 60000) / 1000);
+  setCdValue('cdDays', days);
+  setCdValue('cdHours', hours);
+  setCdValue('cdMinutes', minutes);
+  setCdValue('cdSeconds', seconds);
 }
 
 /* ============================================================
@@ -656,6 +673,62 @@ function toggleRetroMode() {
   }
 }
 
+/* ============================================================
+   SCROLL REVEAL — sections and dividers fade/rise into view
+   ============================================================ */
+function initScrollReveal() {
+  const sections = document.querySelectorAll('main > section');
+  sections.forEach((s) => s.classList.add('reveal'));
+
+  const targets = [...sections, ...document.querySelectorAll('.divider')];
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach((t) => t.classList.add('in-view'));
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  targets.forEach((t) => io.observe(t));
+}
+
+/* ============================================================
+   SIDE DOT NAVIGATION (desktop) — shows scroll progress
+   ============================================================ */
+function initSideDots() {
+  const dots = document.querySelectorAll('.side-dots a');
+  if (!dots.length) return;
+
+  function updateLabels() {
+    dots.forEach((d) => {
+      const key = 'nav' + d.dataset.section.charAt(0).toUpperCase() + d.dataset.section.slice(1);
+      d.title = ui(key) || '';
+    });
+  }
+  updateLabels();
+  window.__updateSideDotLabels = updateLabels;
+
+  if (!('IntersectionObserver' in window)) return;
+  const sections = Array.from(dots).map((d) => document.getElementById(d.dataset.section)).filter(Boolean);
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const dot = document.querySelector(`.side-dots a[data-section="${entry.target.id}"]`);
+      if (!dot) return;
+      dots.forEach((d) => d.classList.remove('active'));
+      dot.classList.add('active');
+    });
+  }, { threshold: 0.5 });
+  sections.forEach((s) => io.observe(s));
+}
+
 function initEasterEggs() {
   // Konami code: ↑ ↑ ↓ ↓ ← → ← → b a
   const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
@@ -703,6 +776,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initGuestDetailFields();
   initRsvpForm();
   initEasterEggs();
+  initScrollReveal();
+  initSideDots();
   updateCountdown();
-  setInterval(updateCountdown, 60000);
+  setInterval(updateCountdown, 1000);
 });
