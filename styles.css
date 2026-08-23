@@ -229,7 +229,10 @@ a { color: var(--gold); }
   position: absolute;
   bottom: 1.5rem;
   display: flex;
-  gap: 1.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem 1.4rem;
+  max-width: min(90vw, 640px);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -380,6 +383,29 @@ a { color: var(--gold); }
 .hotel-card h5 { margin: 0 0 0.3rem; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; }
 .hotel-card p { margin: 0.2rem 0; font-size: 0.88rem; color: var(--ink-soft); }
 .hotel-card .code { display: inline-block; margin-top: 0.4rem; padding: 0.15rem 0.6rem; background: var(--gold-soft); border-radius: 3px; font-size: 0.8rem; letter-spacing: 0.05em; }
+
+.faq-list { max-width: 640px; margin: 2rem auto 0; display: flex; flex-direction: column; gap: 0.8rem; }
+.faq-item { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.3rem; }
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--ink);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  color: var(--gold);
+  font-size: 1.3rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.faq-item[open] summary::after { content: '\2212'; }
+.faq-item p { margin: 0.7rem 0 0; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
 
 .contact-grid {
   display: grid;

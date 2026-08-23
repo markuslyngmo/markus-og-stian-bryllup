@@ -69,8 +69,10 @@ const UI_TEXT = {
     navOsa: "OSA",
     navProgram: "Program",
     navPraktisk: "Praktisk",
+    navFaq: "FAQ",
     navKontakt: "Kontakt",
     navGaver: "Gaver",
+    faqTitle: "Ofte stilte spørsmål",
     infoTitle: "Dato & sted",
     ceremonyLabel: "Vielse",
     receptionLabel: "Middag & fest",
@@ -146,8 +148,10 @@ const UI_TEXT = {
     navOsa: "RSVP",
     navProgram: "Program",
     navPraktisk: "Practical",
+    navFaq: "FAQ",
     navKontakt: "Contact",
     navGaver: "Gifts",
+    faqTitle: "Frequently asked questions",
     infoTitle: "Date & venue",
     ceremonyLabel: "Ceremony",
     receptionLabel: "Dinner & party",
@@ -306,6 +310,25 @@ const WEDDING = {
     { name: "Hotellnavn 2", note: { no: "Gratis parkering, shuttlebuss tilgjengelig", en: "Free parking, shuttle bus available" }, code: "RABATTKODE2", url: "#" }
   ],
 
+  faq: [
+    {
+      q: { no: "Kan jeg ta med barn?", en: "Can I bring my kids?" },
+      a: { no: "Legg inn barnepolicy hit — f.eks. om det er en barnefri feiring, eller om barn er velkomne.", en: "Add your children policy here — e.g. whether this is an adults-only celebration, or kids are welcome." }
+    },
+    {
+      q: { no: "Kan jeg ta med en date/pluss én?", en: "Can I bring a plus-one?" },
+      a: { no: "Legg inn pluss-én-policy hit. Antall gjester i OSA-skjemaet er allerede satt til det antallet dere har invitert.", en: "Add your plus-one policy here. The guest count in the RSVP form is already set to the number you've invited." }
+    },
+    {
+      q: { no: "Når bør jeg ankomme?", en: "When should I arrive?" },
+      a: { no: "Vi anbefaler å ankomme senest 15-20 minutter før vielsen starter, se program lenger opp på siden.", en: "We recommend arriving at least 15-20 minutes before the ceremony starts — see the schedule further up the page." }
+    },
+    {
+      q: { no: "Har dere flere spørsmål vi ikke har svart på her?", en: "Have more questions we haven't answered here?" },
+      a: { no: "Ta gjerne kontakt med oss direkte — se kontaktinfo lenger ned på siden.", en: "Feel free to reach out to us directly — see the contact info further down the page." }
+    }
+  ],
+
   toastmaster: { name: "Navn", phone: "+47 000 00 000", email: "toastmaster@epost.no" },
   speechDeadline: { no: "1. juni 2027", en: "1 June 2027" },
 
@@ -415,6 +438,15 @@ function render() {
       <p>${t(h.note)}</p>
       ${h.code ? `<span class="code">${ui('discountCodeLabel')} ${h.code}</span>` : ''}
     </div>
+  `).join('');
+
+  // FAQ
+  const faqList = document.getElementById('faqList');
+  faqList.innerHTML = WEDDING.faq.map(item => `
+    <details class="faq-item">
+      <summary>${t(item.q)}</summary>
+      <p>${t(item.a)}</p>
+    </details>
   `).join('');
 
   // Gift links
