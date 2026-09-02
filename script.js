@@ -261,13 +261,13 @@ function initLangToggle() {
 const WEDDING = {
   partner1: "Markus",
   partner2: "Stian",
-  date: "2027-08-07T14:00:00", // ISO-dato+klokkeslett for vielsen, brukes til nedtelling og kalender
+  date: "2027-08-07T15:00:00", // ISO-dato+klokkeslett for vielsen, brukes til nedtelling og kalender
 
   ceremony: {
-    time: "14:00",
-    name: { no: "Sted kunngjøres snart", en: "Venue announced soon" },
-    address: { no: "Vi oppdaterer så snart vielsesstedet er bestemt", en: "We'll update this as soon as the ceremony venue is decided" },
-    mapUrl: ""
+    time: "15:00",
+    name: "Bymuseet",
+    address: "Frognerveien 67, 0266 Oslo",
+    mapUrl: "https://maps.google.com/?q=Bymuseet+Frognerveien+67+0266+Oslo"
   },
   reception: {
     time: "17:00",
@@ -294,9 +294,9 @@ const WEDDING = {
   rsvpFormEndpoint: "https://formspree.io/f/xjybajlj",
 
   program: [
-    { time: "13:30", title: { no: "Gjestene ankommer vielsesstedet", en: "Guests arrive at the ceremony venue" } },
-    { time: "14:00", title: { no: "Vielse", en: "Ceremony" } },
-    { time: "15:00", title: { no: "Gratulasjon og mingling", en: "Congratulations & mingling" } },
+    { time: "14:30", title: { no: "Gjestene ankommer vielsesstedet", en: "Guests arrive at the ceremony venue" } },
+    { time: "15:00", title: { no: "Vielse", en: "Ceremony" } },
+    { time: "16:00", title: { no: "Gratulasjon og mingling", en: "Congratulations & mingling" } },
     { time: "17:00", title: { no: "Ankomst selskapslokale", en: "Arrival at the reception venue" } },
     { time: "18:00", title: { no: "Middag", en: "Dinner" } },
     { time: "21:00", title: { no: "Fest og dans", en: "Party & dancing" } }
