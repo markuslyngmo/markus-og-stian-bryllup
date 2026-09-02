@@ -278,23 +278,23 @@ const WEDDING = {
   endTime: "01:00",
 
   directions: {
-    no: "Dere ordner selv reisen frem til vielsen på Bymuseet. Etter vielsen ordner vi transport videre til Ekebergrestauranten — bare bli med, dere trenger ikke tenke på det selv.",
-    en: "You'll need to make your own way to the ceremony at Bymuseet. After the ceremony we've arranged transport onward to Ekebergrestauranten — just join us, no need to plan that part yourselves."
+    no: "Dere ordner selv reisen frem til vielsen på Bymuseet — vær der senest kl. 14:45. Etter vielsen ordner vi transport videre til Ekebergrestauranten, så da trenger dere ikke tenke på noe mer.",
+    en: "You'll need to make your own way to the ceremony at Bymuseet — please be there by 14:45 at the latest. After the ceremony we've arranged transport onward to Ekebergrestauranten, so there's nothing more to plan after that."
   },
   parking: {
     no: "Legg inn informasjon om parkeringsmuligheter hit.",
     en: "Add parking information here."
   },
   transport: {
-    no: "Vi setter opp felles transport fra Bymuseet til Ekebergrestauranten rett etter vielsen. Nærmere detaljer om avgangstidspunkt kommer.",
-    en: "We're arranging shared transport from Bymuseet to Ekebergrestauranten right after the ceremony. More details on departure time to follow."
+    no: "Kom dere selv frem til Bymuseet senest kl. 14:45. Derfra tar vi oss av resten — felles transport til Ekebergrestauranten rett etter vielsen.",
+    en: "Make your own way to Bymuseet by 14:45 at the latest. From there we've got it covered — shared transport to Ekebergrestauranten right after the ceremony."
   },
 
   rsvpDeadline: { no: "1. mai 2027", en: "1 May 2027" },
   rsvpFormEndpoint: "https://formspree.io/f/xjybajlj",
 
   program: [
-    { time: "14:30", title: { no: "Gjestene ankommer vielsesstedet", en: "Guests arrive at the ceremony venue" } },
+    { time: "14:45", title: { no: "Gjestene ankommer vielsesstedet", en: "Guests arrive at the ceremony venue" } },
     { time: "15:00", title: { no: "Vielse", en: "Ceremony" } },
     { time: "16:00", title: { no: "Gratulasjon og mingling", en: "Congratulations & mingling" } },
     { time: "17:00", title: { no: "Ankomst selskapslokale", en: "Arrival at the reception venue" } },
