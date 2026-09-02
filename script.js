@@ -315,15 +315,15 @@ const WEDDING = {
   faq: [
     {
       q: { no: "Kan jeg ta med barn?", en: "Can I bring my kids?" },
-      a: { no: "Legg inn barnepolicy hit — f.eks. om det er en barnefri feiring, eller om barn er velkomne.", en: "Add your children policy here — e.g. whether this is an adults-only celebration, or kids are welcome." }
+      a: { no: "Barn er velkomne på selve vielsen, men festen etterpå på Ekebergrestauranten er for voksne.", en: "Kids are welcome at the ceremony itself, but the party afterwards at Ekebergrestauranten is adults only." }
     },
     {
       q: { no: "Kan jeg ta med en date/pluss én?", en: "Can I bring a plus-one?" },
-      a: { no: "Legg inn pluss-én-policy hit. Antall gjester i OSA-skjemaet er allerede satt til det antallet dere har invitert.", en: "Add your plus-one policy here. The guest count in the RSVP form is already set to the number you've invited." }
+      a: { no: "Vi har dessverre ikke mulighet til det denne gangen — antallet i OSA-skjemaet er nøyaktig hvor mange vi har plass til fra hver husstand.", en: "Unfortunately we don't have room for that this time — the guest count in the RSVP form is exactly how many we have space for from each household." }
     },
     {
       q: { no: "Når bør jeg ankomme?", en: "When should I arrive?" },
-      a: { no: "Vi anbefaler å ankomme senest 15-20 minutter før vielsen starter, se program lenger opp på siden.", en: "We recommend arriving at least 15-20 minutes before the ceremony starts — see the schedule further up the page." }
+      a: { no: "Vær på Bymuseet senest kl. 14:45 — vielsen starter kl. 15:00.", en: "Be at Bymuseet by 14:45 at the latest — the ceremony starts at 15:00." }
     },
     {
       q: { no: "Har dere flere spørsmål vi ikke har svart på her?", en: "Have more questions we haven't answered here?" },
