@@ -278,16 +278,16 @@ const WEDDING = {
   endTime: "01:00",
 
   directions: {
-    no: "Legg inn veibeskrivelse hit — f.eks. avkjøring, holdeplass eller gangavstand mellom vielsesstedet og Ekebergrestauranten.",
-    en: "Add directions here — e.g. turn-off, stop, or walking distance between the ceremony venue and Ekebergrestauranten."
+    no: "Dere ordner selv reisen frem til vielsen på Bymuseet. Etter vielsen ordner vi transport videre til Ekebergrestauranten — bare bli med, dere trenger ikke tenke på det selv.",
+    en: "You'll need to make your own way to the ceremony at Bymuseet. After the ceremony we've arranged transport onward to Ekebergrestauranten — just join us, no need to plan that part yourselves."
   },
   parking: {
     no: "Legg inn informasjon om parkeringsmuligheter hit.",
     en: "Add parking information here."
   },
   transport: {
-    no: "Trikk 13/19 fra Oslo S til holdeplassen Ekebergparken, ca. 10 minutters kjøretur — trikken går hvert 10. minutt.",
-    en: "Tram 13/19 from Oslo S to the Ekebergparken stop, about a 10-minute ride — trams run every 10 minutes."
+    no: "Vi setter opp felles transport fra Bymuseet til Ekebergrestauranten rett etter vielsen. Nærmere detaljer om avgangstidspunkt kommer.",
+    en: "We're arranging shared transport from Bymuseet to Ekebergrestauranten right after the ceremony. More details on departure time to follow."
   },
 
   rsvpDeadline: { no: "1. mai 2027", en: "1 May 2027" },
