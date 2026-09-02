@@ -275,7 +275,7 @@ const WEDDING = {
     address: "Kongsveien 15, 0193 Oslo",
     mapUrl: "https://maps.google.com/?q=Ekebergrestauranten+Kongsveien+15+0193+Oslo"
   },
-  endTime: "01:00",
+  endTime: "03:00",
 
   directions: {
     no: "Dere ordner selv reisen frem til vielsen på Bymuseet — vær der senest kl. 14:45. Etter vielsen ordner vi transport videre til Ekebergrestauranten, så da trenger dere ikke tenke på noe mer.",
