@@ -261,7 +261,7 @@ function initLangToggle() {
 const WEDDING = {
   partner1: "Markus",
   partner2: "Stian",
-  date: "2027-08-07T15:00:00", // ISO-dato+klokkeslett for vielsen, brukes til nedtelling og kalender
+  date: "2027-08-07T15:00:00+02:00", // ISO-dato+klokkeslett for vielsen (norsk sommertid), brukes til nedtelling og kalender
 
   ceremony: {
     time: "15:00",
@@ -459,7 +459,9 @@ function render() {
 
   // Calendar link (Google Calendar)
   const start = new Date(WEDDING.date);
-  const end = new Date(start.getTime() + 10 * 60 * 60 * 1000);
+  const datePart = WEDDING.date.slice(0, 10);
+  let end = new Date(`${datePart}T${WEDDING.endTime}:00+02:00`);
+  if (end <= start) end = new Date(end.getTime() + 24 * 60 * 60 * 1000); // endTime is after midnight
   const fmt = d => d.toISOString().replace(/[-:]|\.\d{3}/g, '');
   const calUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(WEDDING.partner1 + ' & ' + WEDDING.partner2 + ' - ' + ui('calendarEventTitle'))}&dates=${fmt(start)}/${fmt(end)}&location=${encodeURIComponent(t(WEDDING.ceremony.address))}&details=${encodeURIComponent(ui('calendarCeremonyPrefix') + ' ' + t(WEDDING.ceremony.name))}`;
   document.getElementById('calendarLink').href = calUrl;
@@ -508,6 +510,12 @@ function renderGuestDetailFields() {
   const container = document.getElementById('guestDetails');
   const count = Math.max(1, Math.min(10, parseInt(guestsInput.value, 10) || 1));
 
+  // Preserve already-entered values (e.g. across a language switch) before rebuilding
+  const previous = {};
+  container.querySelectorAll('input, textarea').forEach((el) => {
+    previous[el.name] = el.type === 'checkbox' ? el.checked : el.value;
+  });
+
   container.innerHTML = '';
   for (let i = 1; i <= count; i++) {
     const card = document.createElement('div');
@@ -538,6 +546,13 @@ function renderGuestDetailFields() {
     `;
     container.appendChild(card);
   }
+
+  // Restore preserved values
+  container.querySelectorAll('input, textarea').forEach((el) => {
+    if (!(el.name in previous)) return;
+    if (el.type === 'checkbox') el.checked = previous[el.name];
+    else el.value = previous[el.name];
+  });
 }
 
 function initGuestDetailFields() {
