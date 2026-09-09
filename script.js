@@ -1,10 +1,19 @@
 /* ============================================================
    PASSORDBESKYTTELSE
    Merk: dette er kun en lett sperre (klient-side), ikke ekte
-   sikkerhet — endre WEDDING_PASSWORD_HASH ved å regne ut en
+   sikkerhet — endre hash-verdiene ved å regne ut en ny
    SHA-256-hash av det nye passordet.
+
+   Siden finnes i to varianter som deler denne fila:
+   - index.html — hele bryllupet (vielse + fest), passord "lyngmojakobsen"
+   - fest.html  — kun festen, for gjester som ikke er med på vielsen,
+     passord "jakobsenlyngmo". fest.html setter window.PAGE_MODE = 'fest'
+     i en liten inline-script før denne fila lastes.
    ============================================================ */
-const WEDDING_PASSWORD_HASH = "1bdb7c2d8f2972c4eab8404826b21c6130007d3abd1a20984e5c5eda9c2eca78";
+const PAGE_MODE = window.PAGE_MODE === 'fest' ? 'fest' : 'main';
+const WEDDING_PASSWORD_HASH = "1bdb7c2d8f2972c4eab8404826b21c6130007d3abd1a20984e5c5eda9c2eca78"; // lyngmojakobsen
+const WEDDING_PASSWORD_HASH_FEST = "dfa629bc17fdb369fd6aebfef05968b46706da0b0bc24b7cb58687902004b865"; // jakobsenlyngmo
+const UNLOCK_KEY = PAGE_MODE === 'fest' ? 'wedding_unlocked_fest' : 'wedding_unlocked';
 
 async function sha256Hex(text) {
   const enc = new TextEncoder().encode(text);
@@ -18,11 +27,13 @@ function initPasswordGate() {
   const error = document.getElementById('passwordError');
   if (!form) return;
 
+  const expectedHash = PAGE_MODE === 'fest' ? WEDDING_PASSWORD_HASH_FEST : WEDDING_PASSWORD_HASH;
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const hash = await sha256Hex(input.value.trim());
-    if (hash === WEDDING_PASSWORD_HASH) {
-      localStorage.setItem('wedding_unlocked', 'true');
+    if (hash === expectedHash) {
+      localStorage.setItem(UNLOCK_KEY, 'true');
       document.body.classList.remove('locked');
     } else {
       error.classList.add('show');
@@ -121,7 +132,8 @@ const UI_TEXT = {
     summaryNoName: "(uten navn)",
     summaryMessage: "Hilsen til brudeparet:",
     calendarEventTitle: "Bryllup",
-    calendarCeremonyPrefix: "Vielse:"
+    calendarCeremonyPrefix: "Vielse:",
+    calendarReceptionPrefix: "Fest:"
   },
   en: {
     eyebrow: "We're getting married",
@@ -191,7 +203,8 @@ const UI_TEXT = {
     summaryNoName: "(no name)",
     summaryMessage: "Message to the couple:",
     calendarEventTitle: "Wedding",
-    calendarCeremonyPrefix: "Ceremony:"
+    calendarCeremonyPrefix: "Ceremony:",
+    calendarReceptionPrefix: "Party:"
   }
 };
 function ui(key) {
@@ -261,13 +274,19 @@ const WEDDING = {
     no: "Dere ordner selv reisen frem til vielsen på Bymuseet — vær der senest kl. 14:45. Etter vielsen ordner vi transport videre til Ekebergrestauranten, så da trenger dere ikke tenke på noe mer.",
     en: "You'll need to make your own way to the ceremony at Bymuseet — please be there by 14:45 at the latest. After the ceremony we've arranged transport onward to Ekebergrestauranten, so there's nothing more to plan after that."
   },
+  // Vises i stedet for "directions" på fest.html (gjester som kun er med på festen)
+  directionsFest: {
+    no: "Dere ordner selv reisen frem til Ekebergrestauranten — vi ønsker dere velkommen fra kl. 17:00.",
+    en: "You'll need to make your own way to Ekebergrestauranten — we'll welcome you from 17:00."
+  },
   rsvpDeadline: { no: "15. februar 2027", en: "15 February 2027" },
   rsvpFormEndpoint: "https://formspree.io/f/xjybajlj",
 
+  // ceremonyOnly-poster skjules i programmet på fest.html
   program: [
-    { time: "14:45", title: { no: "Gjestene ankommer vielsesstedet", en: "Guests arrive at the ceremony venue" } },
-    { time: "15:00", title: { no: "Vielse", en: "Ceremony" } },
-    { time: "16:00", title: { no: "Gratulasjon og mingling", en: "Congratulations & mingling" } },
+    { time: "14:45", title: { no: "Gjestene ankommer vielsesstedet", en: "Guests arrive at the ceremony venue" }, ceremonyOnly: true },
+    { time: "15:00", title: { no: "Vielse", en: "Ceremony" }, ceremonyOnly: true },
+    { time: "16:00", title: { no: "Gratulasjon og mingling", en: "Congratulations & mingling" }, ceremonyOnly: true },
     { time: "17:00", title: { no: "Ankomst selskapslokale", en: "Arrival at the reception venue" } },
     { time: "18:00", title: { no: "Middag", en: "Dinner" } },
     { time: "21:00", title: { no: "Fest og dans", en: "Party & dancing" } }
@@ -322,6 +341,16 @@ function setMapLink(id, url) {
   }
 }
 
+// Nedtellingen og kalenderknappen peker mot vielsen på index.html,
+// men mot festens starttidspunkt på fest.html.
+function eventStartDate() {
+  if (PAGE_MODE === 'fest') {
+    const datePart = WEDDING.date.slice(0, 10);
+    return new Date(`${datePart}T${WEDDING.reception.time}:00+02:00`);
+  }
+  return new Date(WEDDING.date);
+}
+
 function render() {
   applyStaticTranslations();
 
@@ -338,15 +367,16 @@ function render() {
   fillText('receptionAddress', t(WEDDING.reception.address));
   setMapLink('receptionMapLink', WEDDING.reception.mapUrl);
 
-  fillText('directions', t(WEDDING.directions));
+  fillText('directions', t(PAGE_MODE === 'fest' ? WEDDING.directionsFest : WEDDING.directions));
 
   fillText('rsvpDeadline', t(WEDDING.rsvpDeadline));
   fillText('endTime', WEDDING.endTime);
   fillText('dressCode', t(WEDDING.dressCode));
 
-  // Program timeline
+  // Program timeline — på fest.html skjules poster som kun gjelder vielsen
   const timeline = document.getElementById('timeline');
-  timeline.innerHTML = WEDDING.program.map(item => `
+  const programItems = PAGE_MODE === 'fest' ? WEDDING.program.filter(item => !item.ceremonyOnly) : WEDDING.program;
+  timeline.innerHTML = programItems.map(item => `
     <li>
       <span class="t-time">${item.time}</span>
       <span class="t-dot"></span>
@@ -363,13 +393,18 @@ function render() {
     </details>
   `).join('');
 
-  // Calendar link (Google Calendar)
-  const start = new Date(WEDDING.date);
+  // Calendar link (Google Calendar) — peker mot vielsen på index.html,
+  // mot festens start på fest.html
+  const start = eventStartDate();
   const datePart = WEDDING.date.slice(0, 10);
   let end = new Date(`${datePart}T${WEDDING.endTime}:00+02:00`);
   if (end <= start) end = new Date(end.getTime() + 24 * 60 * 60 * 1000); // endTime is after midnight
   const fmt = d => d.toISOString().replace(/[-:]|\.\d{3}/g, '');
-  const calUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(WEDDING.partner1 + ' & ' + WEDDING.partner2 + ' - ' + ui('calendarEventTitle'))}&dates=${fmt(start)}/${fmt(end)}&location=${encodeURIComponent(t(WEDDING.ceremony.address))}&details=${encodeURIComponent(ui('calendarCeremonyPrefix') + ' ' + t(WEDDING.ceremony.name))}`;
+  const calLocation = PAGE_MODE === 'fest' ? t(WEDDING.reception.address) : t(WEDDING.ceremony.address);
+  const calDetails = PAGE_MODE === 'fest'
+    ? `${ui('calendarReceptionPrefix')} ${t(WEDDING.reception.name)}`
+    : `${ui('calendarCeremonyPrefix')} ${t(WEDDING.ceremony.name)}`;
+  const calUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(WEDDING.partner1 + ' & ' + WEDDING.partner2 + ' - ' + ui('calendarEventTitle'))}&dates=${fmt(start)}/${fmt(end)}&location=${encodeURIComponent(calLocation)}&details=${encodeURIComponent(calDetails)}`;
   document.getElementById('calendarLink').href = calUrl;
 }
 
@@ -389,7 +424,7 @@ function setCdValue(id, value) {
 
 function updateCountdown() {
   const now = new Date();
-  const target = new Date(WEDDING.date);
+  const target = eventStartDate();
   const diff = target - now;
   if (diff <= 0) {
     fillText('cdDays', '🎉');
