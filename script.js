@@ -212,6 +212,74 @@ const UI_TEXT = {
     calendarEventTitle: "Wedding",
     calendarCeremonyPrefix: "Ceremony:",
     calendarReceptionPrefix: "Party:"
+  },
+  sv: {
+    eyebrow: "Vi ska gifta oss",
+    passwordTitle: "Ange lösenord",
+    passwordHint: "Du har fått lösenordet av brudparet",
+    passwordPlaceholder: "Lösenord",
+    passwordSubmit: "Öppna sidan",
+    passwordError: "Fel lösenord, försök igen.",
+    heroIntro: "Vi vill så gärna att du är med och firar dagen med oss.",
+    days: "dagar",
+    hours: "timmar",
+    minutes: "minuter",
+    seconds: "sekunder",
+    heroCta: "Svara på inbjudan",
+    navInfo: "Info",
+    navOsa: "OSA",
+    navProgram: "Program",
+    navFaq: "FAQ",
+    navGaver: "Gåvor",
+    faqTitle: "Vanliga frågor",
+    infoTitle: "Datum & plats",
+    ceremonyLabel: "Vigsel",
+    receptionLabel: "Middag & fest",
+    openMap: "Öppna i karta ↗",
+    atTimePrefix: "Kl.",
+    directionsLabel: "Vägbeskrivning",
+    addCalendar: "+ Lägg till i kalender",
+    osaTitle: "OSA",
+    rsvpDeadlineLabel: "Vi behöver svar senast",
+    fullNameLabel: "Fullständigt namn",
+    emailLabel: "E-post",
+    attendingLabel: "Kommer du?",
+    attendingYes: "Ja, jag ser fram emot det!",
+    attendingNo: "Tyvärr kan jag inte komma",
+    guestsLabel: "Antal gäster (inkl. dig själv)",
+    messageLabel: "Hälsning till brudparet (valfritt)",
+    submitLabel: "Skicka svar",
+    testModeNote: "✓ Testläge: svaret har inte skickats någonstans än. Lägg till rsvpFormEndpoint i script.js.",
+    submitError: "Något gick fel — försök igen, eller kontakta oss direkt.",
+    submitSuccess: "Tack för ditt svar! 💛",
+    programTitle: "Dagens program",
+    programEndLabel: "Festen beräknas avslutas kl.",
+    gaverTitle: "Gåvor",
+    giftIntro: "Er närvaro är den bästa gåvan — men vill ni ändå ge något uppskattar vi ett bidrag till smekmånaden.",
+    footerText: "Vi ser fram emot att fira med dig! ❧",
+    guestSelfLabel: "Gäst 1 (du)",
+    guestNameLabel: (n) => `Namn på gäst ${n}`,
+    songWishLabel: "Låtönskan till festen (valfritt)",
+    songWishPlaceholder: "En låt du gärna vill höra på dansgolvet",
+    speechWishLabel: "Vill hålla tal",
+    allergiesLabel: "Matallergier / specialkost (valfritt)",
+    allergiesPlaceholder: "T.ex. gluten, nötter, vegetarian, vegan …",
+    summaryName: "Namn",
+    summaryEmail: "E-post",
+    summaryAttending: "Kommer",
+    summaryGuestCount: "Antal gäster",
+    summaryGuest: (n, name) => `— Gäst ${n}: ${name} —`,
+    summarySong: "Låtönskan",
+    summarySpeech: "Vill hålla tal",
+    summaryAllergies: "Matallergier",
+    summaryYes: "Ja",
+    summaryNo: "Nej",
+    summaryNone: "(inget)",
+    summaryNoName: "(inget namn)",
+    summaryMessage: "Hälsning till brudparet:",
+    calendarEventTitle: "Bröllop",
+    calendarCeremonyPrefix: "Vigsel:",
+    calendarReceptionPrefix: "Fest:"
   }
 };
 function ui(key) {
@@ -279,49 +347,52 @@ const WEDDING = {
 
   directions: {
     no: "Dere ordner selv reisen frem til vielsen på Bymuseet — vær der senest kl. 14:45. Etter vielsen ordner vi transport videre til Ekebergrestauranten, så da trenger dere ikke tenke på noe mer.",
-    en: "You'll need to make your own way to the ceremony at Bymuseet — please be there by 14:45 at the latest. After the ceremony we've arranged transport onward to Ekebergrestauranten, so there's nothing more to plan after that."
+    en: "You'll need to make your own way to the ceremony at Bymuseet — please be there by 14:45 at the latest. After the ceremony we've arranged transport onward to Ekebergrestauranten, so there's nothing more to plan after that.",
+    sv: "Ni ordnar själva resan fram till vigseln på Bymuseet — var där senast kl. 14:45. Efter vigseln ordnar vi transport vidare till Ekebergrestauranten, så då behöver ni inte tänka på något mer."
   },
   // Vises i stedet for "directions" på fest.html (gjester som kun er med på festen)
   directionsFest: {
     no: "Dere ordner selv reisen frem til Ekebergrestauranten — vi ønsker dere velkommen fra kl. 17:00.",
-    en: "You'll need to make your own way to Ekebergrestauranten — we'll welcome you from 17:00."
+    en: "You'll need to make your own way to Ekebergrestauranten — we'll welcome you from 17:00.",
+    sv: "Ni ordnar själva resan fram till Ekebergrestauranten — vi välkomnar er från kl. 17:00."
   },
-  rsvpDeadline: { no: "15. februar 2027", en: "15 February 2027" },
+  rsvpDeadline: { no: "15. februar 2027", en: "15 February 2027", sv: "15 februari 2027" },
   rsvpFormEndpoint: "https://formspree.io/f/xjybajlj",
 
   // ceremonyOnly-poster skjules i programmet på fest.html
   program: [
-    { time: "14:45", title: { no: "Gjestene ankommer vielsesstedet", en: "Guests arrive at the ceremony venue" }, ceremonyOnly: true },
-    { time: "15:00", title: { no: "Vielse", en: "Ceremony" }, ceremonyOnly: true },
-    { time: "16:00", title: { no: "Gratulasjon og mingling", en: "Congratulations & mingling" }, ceremonyOnly: true },
-    { time: "17:00", title: { no: "Ankomst selskapslokale", en: "Arrival at the reception venue" } },
-    { time: "18:00", title: { no: "Middag", en: "Dinner" } },
-    { time: "21:00", title: { no: "Fest og dans", en: "Party & dancing" } }
+    { time: "14:45", title: { no: "Gjestene ankommer vielsesstedet", en: "Guests arrive at the ceremony venue", sv: "Gästerna anländer till vigselplatsen" }, ceremonyOnly: true },
+    { time: "15:00", title: { no: "Vielse", en: "Ceremony", sv: "Vigsel" }, ceremonyOnly: true },
+    { time: "16:00", title: { no: "Gratulasjon og mingling", en: "Congratulations & mingling", sv: "Gratulationer och mingel" }, ceremonyOnly: true },
+    { time: "17:00", title: { no: "Ankomst selskapslokale", en: "Arrival at the reception venue", sv: "Ankomst till festlokalen" } },
+    { time: "18:00", title: { no: "Middag", en: "Dinner", sv: "Middag" } },
+    { time: "21:00", title: { no: "Fest og dans", en: "Party & dancing", sv: "Fest och dans" } }
   ],
 
   faq: [
     {
-      q: { no: "Hva er kleskoden?", en: "What's the dress code?" },
+      q: { no: "Hva er kleskoden?", en: "What's the dress code?", sv: "Vad är klädkoden?" },
       a: "Black Tie"
     },
     {
-      q: { no: "Kan jeg ta med barn?", en: "Can I bring my kids?" },
-      a: { no: "Det er dessverre ikke plass til å ta med barn.", en: "Unfortunately there isn't room to bring children." }
+      q: { no: "Kan jeg ta med barn?", en: "Can I bring my kids?", sv: "Får jag ta med barn?" },
+      a: { no: "Det er dessverre ikke plass til å ta med barn.", en: "Unfortunately there isn't room to bring children.", sv: "Tyvärr finns det inte plats att ta med barn." }
     },
     {
-      q: { no: "Kan jeg ta med en date/pluss én?", en: "Can I bring a plus-one?" },
-      a: { no: "Ta direkte kontakt med en i brudeparet.", en: "Please get in touch directly with one of us." }
+      q: { no: "Kan jeg ta med en date/pluss én?", en: "Can I bring a plus-one?", sv: "Får jag ta med en partner/plus en?" },
+      a: { no: "Ta direkte kontakt med en i brudeparet.", en: "Please get in touch directly with one of us.", sv: "Ta gärna direktkontakt med någon i brudparet." }
     },
     {
-      q: { no: "Har dere flere spørsmål vi ikke har svart på her?", en: "Have more questions we haven't answered here?" },
-      a: { no: "Ta gjerne kontakt med oss direkte.", en: "Feel free to reach out to us directly." }
+      q: { no: "Har dere flere spørsmål vi ikke har svart på her?", en: "Have more questions we haven't answered here?", sv: "Har ni fler frågor vi inte har svarat på här?" },
+      a: { no: "Ta gjerne kontakt med oss direkte.", en: "Feel free to reach out to us directly.", sv: "Hör gärna av er direkt till oss." }
     }
   ],
 
   /* 90-talls-easter-egg: fritt å endre teksten, men la gjerne konseptet stå */
   secretMessage: {
     no: "1989 💛 1990 — to 90-tallsbarn som fant hverandre. Du fant vår hemmelighet!",
-    en: "1989 💛 1990 — two 90s kids who found each other. You found our secret!"
+    en: "1989 💛 1990 — two 90s kids who found each other. You found our secret!",
+    sv: "1989 💛 1990 — två 90-talsbarn som hittade varandra. Du hittade vår hemlighet!"
   }
 };
 
@@ -330,7 +401,8 @@ const WEDDING = {
    ============================================================ */
 function formatDate(iso) {
   const d = new Date(iso);
-  const locale = getLang() === 'en' ? 'en-GB' : 'nb-NO';
+  const locales = { no: 'nb-NO', en: 'en-GB', sv: 'sv-SE' };
+  const locale = locales[getLang()] || 'nb-NO';
   return d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
