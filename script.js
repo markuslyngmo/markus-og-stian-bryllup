@@ -278,7 +278,7 @@ const WEDDING = {
     en: "Make your own way to Bymuseet by 14:45 at the latest. From there we've got it covered — shared transport to Ekebergrestauranten right after the ceremony."
   },
 
-  rsvpDeadline: { no: "1. mai 2027", en: "1 May 2027" },
+  rsvpDeadline: { no: "15. februar 2027", en: "15 February 2027" },
   rsvpFormEndpoint: "https://formspree.io/f/xjybajlj",
 
   program: [
