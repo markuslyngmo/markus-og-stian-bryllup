@@ -496,12 +496,6 @@ body.locked #passwordGate { display: flex; }
 .faq-item[open] summary::after { content: '\2212'; }
 .faq-item p { margin: 0.7rem 0 0; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
 
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
-@media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
-.contact-card { text-align: center; padding: 1.8rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--cream); }
-.contact-card p { margin: 0.3rem 0; }
-.speech-deadline { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.8rem; }
-
 .gift-intro { text-align: center; color: var(--ink-soft); max-width: 500px; margin: 0 auto; }
 
 .site-footer {
@@ -585,7 +579,6 @@ body.retro-mode * { font-family: 'Courier New', monospace !important; }
 body.retro-mode .hero,
 body.retro-mode .win,
 body.retro-mode .venue-card,
-body.retro-mode .contact-card,
 body.retro-mode .info-box,
 body.retro-mode .guest-card,
 body.retro-mode .faq-item {

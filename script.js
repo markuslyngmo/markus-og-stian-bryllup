@@ -71,7 +71,6 @@ const UI_TEXT = {
     navProgram: "Program",
     navPraktisk: "Praktisk",
     navFaq: "FAQ",
-    navKontakt: "Kontakt",
     navGaver: "Gaver",
     faqTitle: "Ofte stilte spørsmål",
     infoTitle: "Dato & sted",
@@ -99,10 +98,6 @@ const UI_TEXT = {
     programEndLabel: "Arrangementet avsluttes ca. kl.",
     praktiskTitle: "Praktiske detaljer",
     dressCodeLabel: "Kleskode",
-    kontaktTitle: "Kontaktpersoner",
-    toastmasterLabel: "Toastmaster",
-    speechDeadlineLabel: "Frist for å melde inn tale/innslag:",
-    coupleLabel: "Brudeparet",
     gaverTitle: "Gaver",
     giftIntro: "Deres tilstedeværelse er den beste gaven — men ønsker dere å gi noe, setter vi stor pris på en pengegave til bryllupsreisen.",
     footerText: "Vi gleder oss til å feire med deg! ❧",
@@ -147,7 +142,6 @@ const UI_TEXT = {
     navProgram: "Program",
     navPraktisk: "Practical",
     navFaq: "FAQ",
-    navKontakt: "Contact",
     navGaver: "Gifts",
     faqTitle: "Frequently asked questions",
     infoTitle: "Date & venue",
@@ -175,10 +169,6 @@ const UI_TEXT = {
     programEndLabel: "The event ends approximately at",
     praktiskTitle: "Practical details",
     dressCodeLabel: "Dress code",
-    kontaktTitle: "Contact",
-    toastmasterLabel: "Toastmaster",
-    speechDeadlineLabel: "Deadline to sign up for a speech/act:",
-    coupleLabel: "The couple",
     gaverTitle: "Gifts",
     giftIntro: "Your presence is the best gift — but if you'd like to give something, we'd greatly appreciate a contribution toward our honeymoon.",
     footerText: "We can't wait to celebrate with you! ❧",
@@ -306,18 +296,9 @@ const WEDDING = {
     },
     {
       q: { no: "Har dere flere spørsmål vi ikke har svart på her?", en: "Have more questions we haven't answered here?" },
-      a: { no: "Ta gjerne kontakt med oss direkte — se kontaktinfo lenger ned på siden.", en: "Feel free to reach out to us directly — see the contact info further down the page." }
+      a: { no: "Ta gjerne kontakt med oss direkte.", en: "Feel free to reach out to us directly." }
     }
   ],
-
-  toastmaster: { name: "Navn", phone: "+47 000 00 000", email: "toastmaster@epost.no" },
-  speechDeadline: { no: "1. juni 2027", en: "1 June 2027" },
-
-  couple: {
-    name1: "Navn — +47 000 00 000",
-    name2: "Navn — +47 000 00 000",
-    email: "brudeparet@epost.no"
-  },
 
   /* 90-talls-easter-egg: fritt å endre teksten, men la gjerne konseptet stå */
   secretMessage: {
@@ -373,21 +354,6 @@ function render() {
   fillText('rsvpDeadline', t(WEDDING.rsvpDeadline));
   fillText('endTime', WEDDING.endTime);
   fillText('dressCode', t(WEDDING.dressCode));
-
-  fillText('toastmasterName', WEDDING.toastmaster.name);
-  const tmPhone = document.getElementById('toastmasterPhone');
-  tmPhone.textContent = WEDDING.toastmaster.phone;
-  tmPhone.href = `tel:${WEDDING.toastmaster.phone.replace(/\s/g, '')}`;
-  const tmEmail = document.getElementById('toastmasterEmail');
-  tmEmail.textContent = WEDDING.toastmaster.email;
-  tmEmail.href = `mailto:${WEDDING.toastmaster.email}`;
-  fillText('speechDeadline', t(WEDDING.speechDeadline));
-
-  fillText('contact1', WEDDING.couple.name1);
-  fillText('contact2', WEDDING.couple.name2);
-  const coupleEmail = document.getElementById('coupleEmail');
-  coupleEmail.textContent = WEDDING.couple.email;
-  coupleEmail.href = `mailto:${WEDDING.couple.email}`;
 
   // Program timeline
   const timeline = document.getElementById('timeline');
