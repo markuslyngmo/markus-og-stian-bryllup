@@ -80,7 +80,6 @@ const UI_TEXT = {
     openMap: "Åpne i kart ↗",
     atTimePrefix: "Kl.",
     directionsLabel: "Veibeskrivelse",
-    parkingLabel: "Parkering",
     transportLabel: "Transport",
     addCalendar: "+ Legg til i kalender",
     osaTitle: "OSA",
@@ -100,8 +99,6 @@ const UI_TEXT = {
     programEndLabel: "Arrangementet avsluttes ca. kl.",
     praktiskTitle: "Praktiske detaljer",
     dressCodeLabel: "Kleskode",
-    hotelsTitle: "Anbefalte hoteller",
-    discountCodeLabel: "Rabattkode:",
     kontaktTitle: "Kontaktpersoner",
     toastmasterLabel: "Toastmaster",
     speechDeadlineLabel: "Frist for å melde inn tale/innslag:",
@@ -160,7 +157,6 @@ const UI_TEXT = {
     openMap: "Open in maps ↗",
     atTimePrefix: "At",
     directionsLabel: "Directions",
-    parkingLabel: "Parking",
     transportLabel: "Transport",
     addCalendar: "+ Add to calendar",
     osaTitle: "RSVP",
@@ -180,8 +176,6 @@ const UI_TEXT = {
     programEndLabel: "The event ends approximately at",
     praktiskTitle: "Practical details",
     dressCodeLabel: "Dress code",
-    hotelsTitle: "Recommended hotels",
-    discountCodeLabel: "Discount code:",
     kontaktTitle: "Contact",
     toastmasterLabel: "Toastmaster",
     speechDeadlineLabel: "Deadline to sign up for a speech/act:",
@@ -281,10 +275,6 @@ const WEDDING = {
     no: "Dere ordner selv reisen frem til vielsen på Bymuseet — vær der senest kl. 14:45. Etter vielsen ordner vi transport videre til Ekebergrestauranten, så da trenger dere ikke tenke på noe mer.",
     en: "You'll need to make your own way to the ceremony at Bymuseet — please be there by 14:45 at the latest. After the ceremony we've arranged transport onward to Ekebergrestauranten, so there's nothing more to plan after that."
   },
-  parking: {
-    no: "Legg inn informasjon om parkeringsmuligheter hit.",
-    en: "Add parking information here."
-  },
   transport: {
     no: "Kom dere selv frem til Bymuseet senest kl. 14:45. Derfra tar vi oss av resten — felles transport til Ekebergrestauranten rett etter vielsen.",
     en: "Make your own way to Bymuseet by 14:45 at the latest. From there we've got it covered — shared transport to Ekebergrestauranten right after the ceremony."
@@ -307,11 +297,6 @@ const WEDDING = {
     en: "Add dress code here, e.g. \"Dress to impress\" / dark suit / black tie."
   },
 
-  hotels: [
-    { name: "Hotellnavn 1", note: { no: "5 min gange fra selskapslokalet", en: "5 min walk from the reception venue" }, code: "RABATTKODE1", url: "#" },
-    { name: "Hotellnavn 2", note: { no: "Gratis parkering, shuttlebuss tilgjengelig", en: "Free parking, shuttle bus available" }, code: "RABATTKODE2", url: "#" }
-  ],
-
   faq: [
     {
       q: { no: "Kan jeg ta med barn?", en: "Can I bring my kids?" },
@@ -320,10 +305,6 @@ const WEDDING = {
     {
       q: { no: "Kan jeg ta med en date/pluss én?", en: "Can I bring a plus-one?" },
       a: { no: "Vi har dessverre ikke mulighet til det denne gangen — antallet i OSA-skjemaet er nøyaktig hvor mange vi har plass til fra hver husstand.", en: "Unfortunately we don't have room for that this time — the guest count in the RSVP form is exactly how many we have space for from each household." }
-    },
-    {
-      q: { no: "Når bør jeg ankomme?", en: "When should I arrive?" },
-      a: { no: "Vær på Bymuseet senest kl. 14:45 — vielsen starter kl. 15:00.", en: "Be at Bymuseet by 14:45 at the latest — the ceremony starts at 15:00." }
     },
     {
       q: { no: "Har dere flere spørsmål vi ikke har svart på her?", en: "Have more questions we haven't answered here?" },
@@ -340,10 +321,6 @@ const WEDDING = {
     email: "brudeparet@epost.no"
   },
 
-  giftLinks: [
-    { label: { no: "Ønskeliste 1", en: "Wishlist 1" }, url: "#" },
-    { label: { no: "Ønskeliste 2", en: "Wishlist 2" }, url: "#" }
-  ],
   giftMoneyNote: {
     no: "Ønsker dere heller å bidra med en pengegave, kan dette gjøres via Vipps til #00000 eller kontonummer 0000.00.00000. Merk gjerne med navnet deres.",
     en: "If you'd rather contribute a monetary gift, you can do so via Vipps to #00000 or account number 0000.00.00000. Please mark it with your name."
@@ -398,7 +375,6 @@ function render() {
   setMapLink('receptionMapLink', WEDDING.reception.mapUrl);
 
   fillText('directions', t(WEDDING.directions));
-  fillText('parking', t(WEDDING.parking));
   fillText('transport', t(WEDDING.transport));
 
   fillText('rsvpDeadline', t(WEDDING.rsvpDeadline));
@@ -432,16 +408,6 @@ function render() {
     </li>
   `).join('');
 
-  // Hotels
-  const hotelGrid = document.getElementById('hotelGrid');
-  hotelGrid.innerHTML = WEDDING.hotels.map(h => `
-    <div class="hotel-card">
-      <h5>${h.name}</h5>
-      <p>${t(h.note)}</p>
-      ${h.code ? `<span class="code">${ui('discountCodeLabel')} ${h.code}</span>` : ''}
-    </div>
-  `).join('');
-
   // FAQ
   const faqList = document.getElementById('faqList');
   faqList.innerHTML = WEDDING.faq.map(item => `
@@ -449,12 +415,6 @@ function render() {
       <summary>${t(item.q)}</summary>
       <p>${t(item.a)}</p>
     </details>
-  `).join('');
-
-  // Gift links
-  const giftLinks = document.getElementById('giftLinks');
-  giftLinks.innerHTML = WEDDING.giftLinks.map(g => `
-    <a class="btn btn-outline" href="${g.url}" target="_blank" rel="noopener">${t(g.label)}</a>
   `).join('');
 
   // Calendar link (Google Calendar)

@@ -477,14 +477,7 @@ body.locked #passwordGate { display: flex; }
 .timeline .t-title { padding-top: 2px; }
 .program-end { text-align: center; color: var(--ink-soft); margin-top: 1.5rem; }
 
-.sub-heading { text-align: center; margin-top: 3rem; margin-bottom: 0.5rem; }
 
-.hotel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.5rem; }
-@media (max-width: 640px) { .hotel-grid { grid-template-columns: 1fr; } }
-.hotel-card { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3rem; }
-.hotel-card h5 { margin: 0 0 0.3rem; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; }
-.hotel-card p { margin: 0.2rem 0; font-size: 0.88rem; color: var(--ink-soft); }
-.hotel-card .code { display: inline-block; margin-top: 0.4rem; padding: 0.15rem 0.6rem; background: var(--gold-soft); border-radius: 3px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.02em; }
 
 .faq-list { max-width: 640px; margin: 2rem auto 0; display: flex; flex-direction: column; gap: 0.8rem; }
 .faq-item { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.3rem; }
@@ -510,8 +503,6 @@ body.locked #passwordGate { display: flex; }
 .speech-deadline { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.8rem; }
 
 .gift-intro { text-align: center; color: var(--ink-soft); max-width: 500px; margin: 0 auto; }
-.gift-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin: 2rem 0; }
-.gift-links a.btn { min-width: 160px; text-align: center; }
 
 .site-footer {
   text-align: center;
@@ -595,7 +586,6 @@ body.retro-mode .hero,
 body.retro-mode .win,
 body.retro-mode .venue-card,
 body.retro-mode .contact-card,
-body.retro-mode .hotel-card,
 body.retro-mode .info-box,
 body.retro-mode .guest-card,
 body.retro-mode .faq-item {
