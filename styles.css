@@ -62,6 +62,7 @@ a { color: var(--gold); }
   padding: 0.7rem 1.2rem;
 }
 body.retro-mode .menubar { top: var(--retro-banner-h, 70px); }
+body.retro-mode .lang-bar { margin-top: var(--retro-banner-h, 70px); }
 .menubar-brand {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
@@ -584,6 +585,8 @@ body.retro-mode .btn {
 body.retro-mode .section-alt { background: #008080 !important; }
 body.retro-mode a { color: #0000ff !important; }
 body.retro-mode .menubar { background: #c0c0c0 !important; border-bottom: 3px outset #fff !important; }
+body.retro-mode .lang-bar { background: #c0c0c0 !important; border-bottom: 3px outset #fff !important; }
+body.retro-mode .lang-btn.active { color: #ff00ff !important; }
 
 .retro-banner {
   display: none;
