@@ -662,46 +662,6 @@ function initScrollReveal() {
   targets.forEach((t) => io.observe(t));
 }
 
-/* ============================================================
-   BOOT SEQUENCE — a short typewriter intro before the hero
-   content fades in (hero reveals itself via CSS regardless,
-   so nothing depends on this ever completing)
-   ============================================================ */
-function initBootSequence() {
-  const el = document.getElementById('bootSeq');
-  if (!el) return;
-
-  const lines = getLang() === 'en'
-    ? ['> loading markus.exe + stian.exe', '> link established ♥', '> status: getting married']
-    : ['> laster markus.exe + stian.exe', '> tilkobling opprettet ♥', '> status: skal gifte oss'];
-
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    el.textContent = lines[lines.length - 1];
-    return;
-  }
-
-  let lineIndex = 0;
-  function typeLine() {
-    if (lineIndex >= lines.length) {
-      setTimeout(() => { el.style.opacity = '0'; }, 500);
-      return;
-    }
-    const line = lines[lineIndex];
-    let charIndex = 0;
-    const iv = setInterval(() => {
-      el.textContent = line.slice(0, charIndex + 1);
-      charIndex++;
-      if (charIndex >= line.length) {
-        clearInterval(iv);
-        lineIndex++;
-        setTimeout(typeLine, 200);
-      }
-    }, 20);
-  }
-  el.style.transition = 'opacity 0.4s ease';
-  typeLine();
-}
-
 function initEasterEggs() {
   // Konami code: ↑ ↑ ↓ ↓ ← → ← → b a
   const konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
@@ -750,7 +710,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initRsvpForm();
   initEasterEggs();
   initScrollReveal();
-  initBootSequence();
   updateCountdown();
   setInterval(updateCountdown, 1000);
 });
