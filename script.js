@@ -79,7 +79,6 @@ const UI_TEXT = {
     openMap: "Åpne i kart ↗",
     atTimePrefix: "Kl.",
     directionsLabel: "Veibeskrivelse",
-    transportLabel: "Transport",
     addCalendar: "+ Legg til i kalender",
     osaTitle: "OSA",
     rsvpDeadlineLabel: "Vi trenger svar innen",
@@ -150,7 +149,6 @@ const UI_TEXT = {
     openMap: "Open in maps ↗",
     atTimePrefix: "At",
     directionsLabel: "Directions",
-    transportLabel: "Transport",
     addCalendar: "+ Add to calendar",
     osaTitle: "RSVP",
     rsvpDeadlineLabel: "Please respond by",
@@ -263,11 +261,6 @@ const WEDDING = {
     no: "Dere ordner selv reisen frem til vielsen på Bymuseet — vær der senest kl. 14:45. Etter vielsen ordner vi transport videre til Ekebergrestauranten, så da trenger dere ikke tenke på noe mer.",
     en: "You'll need to make your own way to the ceremony at Bymuseet — please be there by 14:45 at the latest. After the ceremony we've arranged transport onward to Ekebergrestauranten, so there's nothing more to plan after that."
   },
-  transport: {
-    no: "Kom dere selv frem til Bymuseet senest kl. 14:45. Derfra tar vi oss av resten — felles transport til Ekebergrestauranten rett etter vielsen.",
-    en: "Make your own way to Bymuseet by 14:45 at the latest. From there we've got it covered — shared transport to Ekebergrestauranten right after the ceremony."
-  },
-
   rsvpDeadline: { no: "15. februar 2027", en: "15 February 2027" },
   rsvpFormEndpoint: "https://formspree.io/f/xjybajlj",
 
@@ -280,10 +273,7 @@ const WEDDING = {
     { time: "21:00", title: { no: "Fest og dans", en: "Party & dancing" } }
   ],
 
-  dressCode: {
-    no: "Legg inn kleskode hit, f.eks. «Pynt deg» / mørk dress / antrekk nr. 2.",
-    en: "Add dress code here, e.g. \"Dress to impress\" / dark suit / black tie."
-  },
+  dressCode: "Black Tie",
 
   faq: [
     {
@@ -349,7 +339,6 @@ function render() {
   setMapLink('receptionMapLink', WEDDING.reception.mapUrl);
 
   fillText('directions', t(WEDDING.directions));
-  fillText('transport', t(WEDDING.transport));
 
   fillText('rsvpDeadline', t(WEDDING.rsvpDeadline));
   fillText('endTime', WEDDING.endTime);
