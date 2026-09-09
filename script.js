@@ -104,8 +104,7 @@ const UI_TEXT = {
     speechDeadlineLabel: "Frist for å melde inn tale/innslag:",
     coupleLabel: "Brudeparet",
     gaverTitle: "Gaver",
-    giftIntro: "Deres tilstedeværelse er den beste gaven — men ønsker dere å gi noe, setter vi stor pris på følgende:",
-    giftMoneyLabel: "Pengegave",
+    giftIntro: "Deres tilstedeværelse er den beste gaven — men ønsker dere å gi noe, setter vi stor pris på en pengegave til bryllupsreisen.",
     footerText: "Vi gleder oss til å feire med deg! ❧",
     guestSelfLabel: "Gjest 1 (deg)",
     guestNameLabel: (n) => `Navn på gjest ${n}`,
@@ -181,8 +180,7 @@ const UI_TEXT = {
     speechDeadlineLabel: "Deadline to sign up for a speech/act:",
     coupleLabel: "The couple",
     gaverTitle: "Gifts",
-    giftIntro: "Your presence is the best gift — but if you'd like to give something, we'd greatly appreciate the following:",
-    giftMoneyLabel: "Monetary gift",
+    giftIntro: "Your presence is the best gift — but if you'd like to give something, we'd greatly appreciate a contribution toward our honeymoon.",
     footerText: "We can't wait to celebrate with you! ❧",
     guestSelfLabel: "Guest 1 (you)",
     guestNameLabel: (n) => `Name of guest ${n}`,
@@ -321,11 +319,6 @@ const WEDDING = {
     email: "brudeparet@epost.no"
   },
 
-  giftMoneyNote: {
-    no: "Ønsker dere heller å bidra med en pengegave, kan dette gjøres via Vipps til #00000 eller kontonummer 0000.00.00000. Merk gjerne med navnet deres.",
-    en: "If you'd rather contribute a monetary gift, you can do so via Vipps to #00000 or account number 0000.00.00000. Please mark it with your name."
-  },
-
   /* 90-talls-easter-egg: fritt å endre teksten, men la gjerne konseptet stå */
   secretMessage: {
     no: "1989 💛 1990 — to 90-tallsbarn som fant hverandre. Du fant vår hemmelighet!",
@@ -395,8 +388,6 @@ function render() {
   const coupleEmail = document.getElementById('coupleEmail');
   coupleEmail.textContent = WEDDING.couple.email;
   coupleEmail.href = `mailto:${WEDDING.couple.email}`;
-
-  fillText('giftMoneyNote', t(WEDDING.giftMoneyNote));
 
   // Program timeline
   const timeline = document.getElementById('timeline');
