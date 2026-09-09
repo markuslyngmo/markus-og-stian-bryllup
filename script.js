@@ -5,15 +5,18 @@
    SHA-256-hash av det nye passordet.
 
    Siden finnes i to varianter som deler denne fila:
-   - index.html — hele bryllupet (vielse + fest), passord "lyngmojakobsen"
-   - fest.html  — kun festen, for gjester som ikke er med på vielsen,
-     passord "jakobsenlyngmo". fest.html setter window.PAGE_MODE = 'fest'
-     i en liten inline-script før denne fila lastes.
+   - index.html — hele bryllupet (vielse + fest)
+   - fest.html  — kun festen, for gjester som ikke er med på vielsen
+
+   Det er passordet, ikke url-en, som avgjør hvor gjesten havner:
+   skriver du "lyngmojakobsen" havner du på index.html (vielse + fest),
+   skriver du "jakobsenlyngmo" havner du på fest.html (kun fest) — uansett
+   hvilken av de to sidene du åpnet først. fest.html setter
+   window.PAGE_MODE = 'fest' i en liten inline-script før denne fila lastes.
    ============================================================ */
 const PAGE_MODE = window.PAGE_MODE === 'fest' ? 'fest' : 'main';
-const WEDDING_PASSWORD_HASH = "1bdb7c2d8f2972c4eab8404826b21c6130007d3abd1a20984e5c5eda9c2eca78"; // lyngmojakobsen
-const WEDDING_PASSWORD_HASH_FEST = "dfa629bc17fdb369fd6aebfef05968b46706da0b0bc24b7cb58687902004b865"; // jakobsenlyngmo
-const UNLOCK_KEY = PAGE_MODE === 'fest' ? 'wedding_unlocked_fest' : 'wedding_unlocked';
+const WEDDING_PASSWORD_HASH = "1bdb7c2d8f2972c4eab8404826b21c6130007d3abd1a20984e5c5eda9c2eca78"; // lyngmojakobsen -> index.html
+const WEDDING_PASSWORD_HASH_FEST = "dfa629bc17fdb369fd6aebfef05968b46706da0b0bc24b7cb58687902004b865"; // jakobsenlyngmo -> fest.html
 
 async function sha256Hex(text) {
   const enc = new TextEncoder().encode(text);
@@ -27,14 +30,24 @@ function initPasswordGate() {
   const error = document.getElementById('passwordError');
   if (!form) return;
 
-  const expectedHash = PAGE_MODE === 'fest' ? WEDDING_PASSWORD_HASH_FEST : WEDDING_PASSWORD_HASH;
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const hash = await sha256Hex(input.value.trim());
-    if (hash === expectedHash) {
-      localStorage.setItem(UNLOCK_KEY, 'true');
-      document.body.classList.remove('locked');
+
+    if (hash === WEDDING_PASSWORD_HASH) {
+      localStorage.setItem('wedding_unlocked', 'true');
+      if (PAGE_MODE === 'fest') {
+        window.location.href = 'index.html';
+      } else {
+        document.body.classList.remove('locked');
+      }
+    } else if (hash === WEDDING_PASSWORD_HASH_FEST) {
+      localStorage.setItem('wedding_unlocked_fest', 'true');
+      if (PAGE_MODE === 'main') {
+        window.location.href = 'fest.html';
+      } else {
+        document.body.classList.remove('locked');
+      }
     } else {
       error.classList.add('show');
       input.value = '';
