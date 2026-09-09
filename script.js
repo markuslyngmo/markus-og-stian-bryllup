@@ -80,7 +80,6 @@ const UI_TEXT = {
     navInfo: "Info",
     navOsa: "OSA",
     navProgram: "Program",
-    navPraktisk: "Praktisk",
     navFaq: "FAQ",
     navGaver: "Gaver",
     faqTitle: "Ofte stilte spørsmål",
@@ -106,8 +105,6 @@ const UI_TEXT = {
     submitSuccess: "Takk for svaret ditt! 💛",
     programTitle: "Dagens program",
     programEndLabel: "Arrangementet avsluttes ca. kl.",
-    praktiskTitle: "Praktiske detaljer",
-    dressCodeLabel: "Kleskode",
     gaverTitle: "Gaver",
     giftIntro: "Deres tilstedeværelse er den beste gaven — men ønsker dere å gi noe, setter vi stor pris på en pengegave til bryllupsreisen.",
     footerText: "Vi gleder oss til å feire med deg! ❧",
@@ -151,7 +148,6 @@ const UI_TEXT = {
     navInfo: "Info",
     navOsa: "RSVP",
     navProgram: "Program",
-    navPraktisk: "Practical",
     navFaq: "FAQ",
     navGaver: "Gifts",
     faqTitle: "Frequently asked questions",
@@ -177,8 +173,6 @@ const UI_TEXT = {
     submitSuccess: "Thank you for your response! 💛",
     programTitle: "Schedule for the day",
     programEndLabel: "The event ends approximately at",
-    praktiskTitle: "Practical details",
-    dressCodeLabel: "Dress code",
     gaverTitle: "Gifts",
     giftIntro: "Your presence is the best gift — but if you'd like to give something, we'd greatly appreciate a contribution toward our honeymoon.",
     footerText: "We can't wait to celebrate with you! ❧",
@@ -292,16 +286,18 @@ const WEDDING = {
     { time: "21:00", title: { no: "Fest og dans", en: "Party & dancing" } }
   ],
 
-  dressCode: "Black Tie",
-
   faq: [
     {
+      q: { no: "Hva er kleskoden?", en: "What's the dress code?" },
+      a: "Black Tie"
+    },
+    {
       q: { no: "Kan jeg ta med barn?", en: "Can I bring my kids?" },
-      a: { no: "Barn er velkomne på selve vielsen, men festen etterpå på Ekebergrestauranten er for voksne.", en: "Kids are welcome at the ceremony itself, but the party afterwards at Ekebergrestauranten is adults only." }
+      a: { no: "Det er dessverre ikke plass til å ta med barn.", en: "Unfortunately there isn't room to bring children." }
     },
     {
       q: { no: "Kan jeg ta med en date/pluss én?", en: "Can I bring a plus-one?" },
-      a: { no: "Vi har dessverre ikke mulighet til det denne gangen — antallet i OSA-skjemaet er nøyaktig hvor mange vi har plass til fra hver husstand.", en: "Unfortunately we don't have room for that this time — the guest count in the RSVP form is exactly how many we have space for from each household." }
+      a: { no: "Ta direkte kontakt med en i brudeparet.", en: "Please get in touch directly with one of us." }
     },
     {
       q: { no: "Har dere flere spørsmål vi ikke har svart på her?", en: "Have more questions we haven't answered here?" },
@@ -371,7 +367,6 @@ function render() {
 
   fillText('rsvpDeadline', t(WEDDING.rsvpDeadline));
   fillText('endTime', WEDDING.endTime);
-  fillText('dressCode', t(WEDDING.dressCode));
 
   // Program timeline — på fest.html skjules poster som kun gjelder vielsen
   const timeline = document.getElementById('timeline');
