@@ -152,7 +152,7 @@ const UI_TEXT = {
     passwordPlaceholder: "Password",
     passwordSubmit: "Open the site",
     passwordError: "Wrong password, try again.",
-    heroIntro: "We'd love for you to join us in celebrating the day.",
+    heroIntro: "We'd love for you to join us in celebrating our day.",
     days: "days",
     hours: "hours",
     minutes: "minutes",
