@@ -346,9 +346,9 @@ const WEDDING = {
   endTime: "03:00",
 
   directions: {
-    no: "Dere ordner selv reisen frem til vielsen på Bymuseet — vær der senest kl. 14:45. Etter vielsen ordner vi transport videre til Ekebergrestauranten, så da trenger dere ikke tenke på noe mer.",
-    en: "You'll need to make your own way to the ceremony at Bymuseet — please be there by 14:45 at the latest. After the ceremony we've arranged transport onward to Ekebergrestauranten, so there's nothing more to plan after that.",
-    sv: "Ni ordnar själva resan fram till vigseln på Bymuseet — var där senast kl. 14:45. Efter vigseln ordnar vi transport vidare till Ekebergrestauranten, så då behöver ni inte tänka på något mer."
+    no: "Dere ordner selv reisen frem til vielsen på Bymuseet, vær der senest kl. 14:45. Etter vielsen er det felles transport til Ekebergrestauranten.",
+    en: "You'll need to make your own way to the ceremony at Bymuseet, please be there by 14:45 at the latest. After the ceremony there's shared transport to Ekebergrestauranten.",
+    sv: "Ni ordnar själva resan fram till vigseln på Bymuseet, var där senast kl. 14:45. Efter vigseln är det gemensam transport till Ekebergrestauranten."
   },
   // Vises i stedet for "directions" på fest.html (gjester som kun er med på festen)
   directionsFest: {
