@@ -220,7 +220,7 @@ const UI_TEXT = {
     passwordPlaceholder: "Lösenord",
     passwordSubmit: "Öppna sidan",
     passwordError: "Fel lösenord, försök igen.",
-    heroIntro: "Vi vill så gärna att du är med och firar dagen med oss.",
+    heroIntro: "Vi vill gärna att du är med och firar dagen med oss.",
     days: "dagar",
     hours: "timmar",
     minutes: "minuter",
