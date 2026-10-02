@@ -632,15 +632,22 @@ function initRsvpForm() {
     payload.append('_subject', `OSA fra ${fd.get('fullName') || '?'} — ${attendingLabel}, ${guestsCount} gjester`);
     payload.append('Oppsummering', buildRsvpSummary(fd, guestsCount, attendingLabel));
 
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    note.textContent = '';
+
     try {
-      await fetch(WEDDING.rsvpFormEndpoint, {
+      const res = await fetch(WEDDING.rsvpFormEndpoint, {
         method: 'POST',
         body: payload,
         headers: { Accept: 'application/json' }
       });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       form.innerHTML = `<p style="text-align:center;">${ui('submitSuccess')}</p>`;
     } catch (err) {
       note.textContent = ui('submitError');
+      note.style.color = 'var(--wine)';
+      submitBtn.disabled = false;
     }
   });
 }
