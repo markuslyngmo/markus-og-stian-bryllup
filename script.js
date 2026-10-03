@@ -629,8 +629,9 @@ function initRsvpForm() {
     const payload = new FormData();
     payload.append('name', fd.get('fullName') || '');
     payload.append('email', fd.get('email') || '');
-    payload.append('_subject', `OSA fra ${fd.get('fullName') || '?'} — ${attendingLabel}, ${guestsCount} gjester`);
-    payload.append('Gjestetype', PAGE_MODE === 'fest' ? 'Kun fest' : 'Vielse + fest');
+    const guestType = PAGE_MODE === 'fest' ? 'Kun fest' : 'Vielse + fest';
+    payload.append('_subject', `OSA (${guestType}) fra ${fd.get('fullName') || '?'} — ${attendingLabel}, ${guestsCount} gjester`);
+    payload.append('Gjestetype', guestType);
     payload.append('Oppsummering', buildRsvpSummary(fd, guestsCount, attendingLabel));
 
     const submitBtn = form.querySelector('button[type="submit"]');
