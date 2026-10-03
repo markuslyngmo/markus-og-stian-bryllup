@@ -1,33 +1,47 @@
-# Bryllupsside
+# Bryllupsside — Markus & Stian
+
+Ren statisk side (ingen byggesteg): `index.html`, `fest.html`, `styles.css`, `script.js`. Hostes på GitHub Pages på lyngmojakobsen.no (se `CNAME`).
+
+## To sider, ett passord-skjermbilde
+
+- `index.html` — hele bryllupet (vielse + fest)
+- `fest.html` — kun festen, for gjester som ikke er med på vielsen
+
+Begge sider har samme passordskjerm, og **passordet avgjør hvor gjesten havner**, uansett hvilken lenke de åpnet: ett passord gir hele dagen, det andre kun festen. Dele én lenke (lyngmojakobsen.no) er nok.
+
+Passordene står ikke i klartekst i koden, bare som SHA-256-hasher øverst i `script.js`. Slik bytter du: regn ut hash av det nye passordet i små bokstaver, f.eks.
+
+```
+printf '%s' "nyttpassord" | shasum -a 256
+```
+
+og lim den inn i `WEDDING_PASSWORD_HASH` (hele dagen) eller `WEDDING_PASSWORD_HASH_FEST` (kun fest). Innskrevet passord sammenlignes i små bokstaver.
+
+**Merk:** dette er bare en lett sperre, ikke ekte sikkerhet. Repoet er offentlig, og alt innholdet ligger i `script.js` og kan leses av alle som åpner fila.
 
 ## Slik redigerer du innholdet
 
-Alt innhold (navn, dato, adresser, program, hoteller, kontaktpersoner, gavelenker osv.) ligger samlet i `WEDDING`-objektet øverst i [script.js](script.js). Endre verdiene der — resten av siden (nedtelling, kalenderlenke, program-tidslinje osv.) oppdateres automatisk.
+Alt innhold (navn, dato, adresser, program, FAQ, tekster) ligger samlet i `WEDDING`-objektet i `script.js`, og faste tekster i `UI_TEXT`. Endre der — nedtelling, kalenderlenke og tidslinje oppdateres automatisk.
 
-## Koble til OSA-skjemaet
+Siden er på tre språk: norsk (`no`), engelsk (`en`) og svensk (`sv`). Tekst som skal oversettes skrives som `{ no: "...", en: "...", sv: "..." }`. Mangler en språkversjon, faller siden tilbake til norsk. Legger du til en ny tekst i `UI_TEXT`, må den inn under alle tre språk, ellers feiler siden på det språket.
 
-Skjemaet fungerer i "testmodus" til du kobler det til en mottaker. Enkleste løsning:
+Program-poster merket `ceremonyOnly: true` skjules på `fest.html`.
 
-1. Opprett en gratis konto på [formspree.io](https://formspree.io)
-2. Lag et nytt skjema og kopier endepunkt-URLen
-3. Lim den inn i `rsvpFormEndpoint` i `script.js`
+## OSA-skjemaet
 
-Alternativt kan du bruke Netlify Forms (hvis du hoster på Netlify) eller et innebygd Google Forms-skjema.
+Svarene sendes til [Formspree](https://formspree.io) (endepunktet står i `rsvpFormEndpoint`). Gratisplanen tillater 50 innsendinger per måned. Hver e-post har gjestetypen i emnelinjen og som egen linje (`Kun fest` / `Vielse + fest`).
 
-## Publisere siden
+Får Formspree en feil, ser gjesten en feilmelding i stedet for "Takk for svaret".
 
-Dette er en ren statisk side (`index.html`, `styles.css`, `script.js`) — den kan hostes gratis f.eks. via:
-- **Netlify** — dra og slipp mappen på netlify.com/drop
-- **GitHub Pages**
-- **Vercel**
+## Publisere
+
+Push til `main` — GitHub Pages bygger og publiserer automatisk. Endringer kan ta et par minutter, og nettleseren cacher `script.js` i opptil ti minutter.
 
 ## Easter eggs 🥚
 
-Siden har et par skjulte overraskelser som passer to 90-tallsbarn:
-
-- **Konami-koden** (↑ ↑ ↓ ↓ ← → ← → B A) utløser "retro-modus" — hele siden gjør et 90-talls-webdesign-stup, med konfetti og en liten 8-bit-lyd.
-- **Klikk på navnene deres i toppen 5 ganger raskt** for å avsløre en skjult 1989♥1990-melding.
-- En liten usynlig prikk nederst i venstre hjørne fungerer som en alternativ knapp for retro-modus (for mobil, uten tastatur).
+- **Konami-koden** (↑ ↑ ↓ ↓ ← → ← → B A) utløser "retro-modus" med konfetti og en liten 8-bit-lyd.
+- **Klikk på navnene i toppen 5 ganger raskt** for å avsløre en skjult 1989♥1990-melding.
+- **Joystick-knappen** nede til venstre er en alternativ knapp for retro-modus (for mobil, uten tastatur).
 - Åpne nettleserkonsollen (F12) for en hemmelig hilsen.
 
-Du kan endre teksten i det skjulte badet ved å redigere `secretMessage` i `script.js`.
+Teksten i meldingen redigeres via `secretMessage` i `script.js`.

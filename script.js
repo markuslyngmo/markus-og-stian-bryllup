@@ -1,22 +1,33 @@
 /* ============================================================
    PASSORDBESKYTTELSE
    Merk: dette er kun en lett sperre (klient-side), ikke ekte
-   sikkerhet — endre hash-verdiene ved å regne ut en ny
-   SHA-256-hash av det nye passordet.
+   sikkerhet — alt innholdet ligger i denne fila og kan leses av
+   alle som åpner den. Passordene står bevisst ikke i klartekst her.
+
+   Slik bytter du passord: regn ut SHA-256 av det nye passordet i
+   små bokstaver (f.eks. `printf '%s' "nyttpassord" | shasum -a 256`)
+   og lim hashen inn under. Innskrevet passord gjøres om til små
+   bokstaver før sjekk, så store/små bokstaver spiller ingen rolle.
 
    Siden finnes i to varianter som deler denne fila:
    - index.html — hele bryllupet (vielse + fest)
    - fest.html  — kun festen, for gjester som ikke er med på vielsen
 
-   Det er passordet, ikke url-en, som avgjør hvor gjesten havner:
-   skriver du "lyngmojakobsen" havner du på index.html (vielse + fest),
-   skriver du "jakobsenlyngmo" havner du på fest.html (kun fest) — uansett
-   hvilken av de to sidene du åpnet først. fest.html setter
+   Det er passordet, ikke url-en, som avgjør hvor gjesten havner —
+   uansett hvilken av de to sidene du åpnet først. fest.html setter
    window.PAGE_MODE = 'fest' i en liten inline-script før denne fila lastes.
    ============================================================ */
 const PAGE_MODE = window.PAGE_MODE === 'fest' ? 'fest' : 'main';
-const WEDDING_PASSWORD_HASH = "1bdb7c2d8f2972c4eab8404826b21c6130007d3abd1a20984e5c5eda9c2eca78"; // lyngmojakobsen -> index.html
-const WEDDING_PASSWORD_HASH_FEST = "dfa629bc17fdb369fd6aebfef05968b46706da0b0bc24b7cb58687902004b865"; // jakobsenlyngmo -> fest.html
+const WEDDING_PASSWORD_HASH = "1bdb7c2d8f2972c4eab8404826b21c6130007d3abd1a20984e5c5eda9c2eca78"; // -> index.html (vielse + fest)
+const WEDDING_PASSWORD_HASH_FEST = "dfa629bc17fdb369fd6aebfef05968b46706da0b0bc24b7cb58687902004b865"; // -> fest.html (kun fest)
+
+// localStorage kan kaste (blokkerte cookies, noen in-app-nettlesere) — da skal siden fortsatt virke
+function storageGet(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+function storageSet(key, value) {
+  try { localStorage.setItem(key, value); } catch (e) { /* lagring blokkert — ignorer */ }
+}
 
 async function sha256Hex(text) {
   const enc = new TextEncoder().encode(text);
@@ -32,17 +43,17 @@ function initPasswordGate() {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const hash = await sha256Hex(input.value.trim());
+    const hash = await sha256Hex(input.value.trim().toLowerCase());
 
     if (hash === WEDDING_PASSWORD_HASH) {
-      localStorage.setItem('wedding_unlocked', 'true');
+      storageSet('wedding_unlocked', 'true');
       if (PAGE_MODE === 'fest') {
         window.location.href = 'index.html';
       } else {
         document.body.classList.remove('locked');
       }
     } else if (hash === WEDDING_PASSWORD_HASH_FEST) {
-      localStorage.setItem('wedding_unlocked_fest', 'true');
+      storageSet('wedding_unlocked_fest', 'true');
       if (PAGE_MODE === 'main') {
         window.location.href = 'fest.html';
       } else {
@@ -62,11 +73,16 @@ function initPasswordGate() {
    språk) eller et objekt { no: "...", en: "..." } for tekst som
    bør oversettes. Bruk t(...) for å hente riktig språkversjon.
    ============================================================ */
+const SUPPORTED_LANGS = ['no', 'en', 'sv'];
+const savedLang = storageGet('wedding_lang');
+let currentLang = SUPPORTED_LANGS.includes(savedLang) ? savedLang : 'no';
+
 function getLang() {
-  return localStorage.getItem('wedding_lang') || 'no';
+  return currentLang;
 }
 function setLang(lang) {
-  localStorage.setItem('wedding_lang', lang);
+  currentLang = lang;
+  storageSet('wedding_lang', lang);
   document.documentElement.lang = lang;
 }
 function t(val) {
@@ -286,6 +302,11 @@ function ui(key) {
   return UI_TEXT[getLang()][key];
 }
 
+// E-posten til brudeparet skal alltid være på norsk, uansett hvilket språk gjesten bruker
+function uiNo(key) {
+  return UI_TEXT.no[key];
+}
+
 function applyStaticTranslations() {
   const dict = UI_TEXT[getLang()];
   document.querySelectorAll('[data-i18n]').forEach((el) => {
@@ -302,7 +323,11 @@ function initLangToggle() {
   const buttons = document.querySelectorAll('.lang-btn');
   function updateActive() {
     const lang = getLang();
-    buttons.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
+    buttons.forEach((b) => {
+      const isActive = b.dataset.lang === lang;
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-pressed', String(isActive));
+    });
   }
   buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -403,7 +428,7 @@ function formatDate(iso) {
   const d = new Date(iso);
   const locales = { no: 'nb-NO', en: 'en-GB', sv: 'sv-SE' };
   const locale = locales[getLang()] || 'nb-NO';
-  return d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' });
+  return d.toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Oslo' });
 }
 
 function fillText(id, text) {
@@ -587,24 +612,24 @@ function initGuestDetailFields() {
    ============================================================ */
 function buildRsvpSummary(fd, guestsCount, attendingLabel) {
   const lines = [];
-  lines.push(`${ui('summaryName')}: ${fd.get('fullName') || ''}`);
-  lines.push(`${ui('summaryEmail')}: ${fd.get('email') || ''}`);
-  lines.push(`${ui('summaryAttending')}: ${attendingLabel}`);
-  lines.push(`${ui('summaryGuestCount')}: ${guestsCount}`);
+  lines.push(`${uiNo('summaryName')}: ${fd.get('fullName') || ''}`);
+  lines.push(`${uiNo('summaryEmail')}: ${fd.get('email') || ''}`);
+  lines.push(`${uiNo('summaryAttending')}: ${attendingLabel}`);
+  lines.push(`${uiNo('summaryGuestCount')}: ${guestsCount}`);
   lines.push('');
 
   for (let i = 1; i <= guestsCount; i++) {
     const guestName = i === 1 ? fd.get('fullName') : fd.get(`guestName${i}`);
-    lines.push(ui('summaryGuest')(i, guestName || ui('summaryNoName')));
-    lines.push(`  ${ui('summarySong')}: ${fd.get(`songWish${i}`) || ui('summaryNone')}`);
-    lines.push(`  ${ui('summarySpeech')}: ${fd.get(`speechWish${i}`) === 'on' ? ui('summaryYes') : ui('summaryNo')}`);
-    lines.push(`  ${ui('summaryAllergies')}: ${fd.get(`allergies${i}`) || ui('summaryNone')}`);
+    lines.push(uiNo('summaryGuest')(i, guestName || uiNo('summaryNoName')));
+    lines.push(`  ${uiNo('summarySong')}: ${fd.get(`songWish${i}`) || uiNo('summaryNone')}`);
+    lines.push(`  ${uiNo('summarySpeech')}: ${fd.get(`speechWish${i}`) === 'on' ? uiNo('summaryYes') : uiNo('summaryNo')}`);
+    lines.push(`  ${uiNo('summaryAllergies')}: ${fd.get(`allergies${i}`) || uiNo('summaryNone')}`);
     lines.push('');
   }
 
   const message = fd.get('message');
   if (message) {
-    lines.push(ui('summaryMessage'));
+    lines.push(uiNo('summaryMessage'));
     lines.push(message);
   }
 
@@ -624,13 +649,14 @@ function initRsvpForm() {
 
     const fd = new FormData(form);
     const guestsCount = Math.max(1, Math.min(10, parseInt(fd.get('guests'), 10) || 1));
-    const attendingLabel = fd.get('attending') === 'ja' ? ui('attendingYes') : ui('attendingNo');
+    const attendingLabel = fd.get('attending') === 'ja' ? uiNo('attendingYes') : uiNo('attendingNo');
 
     const payload = new FormData();
     payload.append('name', fd.get('fullName') || '');
     payload.append('email', fd.get('email') || '');
     const guestType = PAGE_MODE === 'fest' ? 'Kun fest' : 'Vielse + fest';
-    payload.append('_subject', `OSA (${guestType}) fra ${fd.get('fullName') || '?'} — ${attendingLabel}, ${guestsCount} gjester`);
+    const guestWord = guestsCount === 1 ? 'gjest' : 'gjester';
+    payload.append('_subject', `OSA (${guestType}) fra ${fd.get('fullName') || '?'} — ${attendingLabel}, ${guestsCount} ${guestWord}`);
     payload.append('Gjestetype', guestType);
     payload.append('Oppsummering', buildRsvpSummary(fd, guestsCount, attendingLabel));
 

@@ -16,9 +16,11 @@
 <body class="locked">
 <script>
   window.PAGE_MODE = 'fest';
-  if (localStorage.getItem('wedding_unlocked_fest') === 'true') {
-    document.body.classList.remove('locked');
-  }
+  try {
+    if (localStorage.getItem('wedding_unlocked_fest') === 'true') {
+      document.body.classList.remove('locked');
+    }
+  } catch (e) { /* lagring blokkert — siden forblir låst til passord er skrevet inn */ }
 </script>
 
 <nav class="menubar" id="menubar">
@@ -32,9 +34,9 @@
   </div>
 </nav>
 <div class="lang-bar" id="langToggle">
-  <button type="button" class="lang-btn" data-lang="no">Norsk</button>
-  <button type="button" class="lang-btn" data-lang="en">English</button>
-  <button type="button" class="lang-btn" data-lang="sv">Svensk</button>
+  <button type="button" class="lang-btn" data-lang="no" lang="no">Norsk</button>
+  <button type="button" class="lang-btn" data-lang="en" lang="en">English</button>
+  <button type="button" class="lang-btn" data-lang="sv" lang="sv">Svensk</button>
 </div>
 
 <div id="passwordGate">
@@ -44,7 +46,7 @@
       <h2 data-i18n="passwordTitle">Skriv inn passord</h2>
       <p class="password-hint" data-i18n="passwordHint">Du har fått passordet av brudeparet</p>
       <form id="passwordForm">
-        <input type="password" id="passwordInput" autocomplete="off" placeholder="Passord" data-i18n-placeholder="passwordPlaceholder" required>
+        <input type="password" id="passwordInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Passord" data-i18n-placeholder="passwordPlaceholder" required>
         <button type="submit" class="btn btn-primary" data-i18n="passwordSubmit">Åpne siden</button>
         <p id="passwordError" class="password-error" data-i18n="passwordError">Feil passord, prøv igjen.</p>
       </form>

@@ -136,6 +136,19 @@ body.retro-mode .lang-bar { margin-top: var(--retro-banner-h, 70px); }
 .lang-btn:hover { color: var(--gold); }
 .lang-btn.active { color: var(--gold); border-color: var(--gold); }
 
+/* Passordskjermen dekker hele vinduet — løft språkvalget over den, så gjester
+   kan bytte språk før de er logget inn */
+body.locked .lang-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2100;
+  background: transparent;
+  border-bottom: none;
+  padding-top: 1rem;
+}
+
 @media (max-width: 640px) {
   .lang-bar { gap: 1.1rem; padding: 0.55rem 0.8rem; }
   .lang-btn { font-size: 0.68rem; }
@@ -305,6 +318,13 @@ body.locked #passwordGate { display: flex; }
   0% { transform: translateY(-8px) scale(0.85); opacity: 0.35; }
   55% { transform: translateY(2px) scale(1.08); opacity: 1; }
   100% { transform: translateY(0) scale(1); }
+}
+@media (max-width: 400px) {
+  .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; width: 100%; }
+  .cd-colon { display: none; }
+  .cd-box { min-width: 0; padding: 0.75rem 0.2rem 0.55rem; }
+  .cd-num { font-size: 1.7rem; }
+  .cd-label { font-size: 0.55rem; letter-spacing: 0.08em; }
 }
 .cd-box-seconds { background: var(--wine); }
 .cd-box-seconds .cd-num { color: var(--gold-soft); }
